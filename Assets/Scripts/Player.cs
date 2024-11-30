@@ -9,6 +9,13 @@ public class Player : MonoBehaviour
 
     public static Player Instance { get; private set; }
 
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else Destroy(Instance);
+    }
+
     void Start()
     {
         
@@ -32,6 +39,7 @@ public class Player : MonoBehaviour
 
     public float GetCurrentSpeed()
     {
+        Debug.Log(currentSpeed);
         return currentSpeed;
     }
 }
