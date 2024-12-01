@@ -52,12 +52,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (moveDirection.magnitude > 0)
-        {
-            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
-        }
-
-        Debug.Log(moveDirection.magnitude);
+        transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
 
         currentSpeed = moveDirection.magnitude;
     }
