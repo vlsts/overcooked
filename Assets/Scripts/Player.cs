@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class Player : MonoBehaviour
 {
@@ -6,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float rotationSpeed;
 
     private float currentSpeed;
+    private const float playerRadius = .7f;
+    private const float playerHeight = 2f;
 
     public static Player Instance { get; private set; }
 
@@ -18,7 +22,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -28,18 +32,38 @@ public class Player : MonoBehaviour
 
     void HandlePlayerMovement()
     {
+        float moveDistance = moveSpeed * Time.deltaTime;
         Vector2 inputVector = GameInput.Instance.GetMovementVector();
         Vector3 moveDirection = new(inputVector.x, 0, inputVector.y);
 
-        transform.position += moveSpeed * Time.deltaTime * moveDirection;
-        transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
+        if (!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirection, moveDistance))
+        {
+            transform.position += moveSpeed * Time.deltaTime * moveDirection;
+        }
+        else if (inputVector.x != 0 && inputVector.y != 0)
+        {
+            if (!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, new Vector3(moveDirection.x, 0, 0).normalized, moveDistance))
+            {
+                transform.position += moveSpeed * Time.deltaTime * new Vector3(moveDirection.x, 0, 0).normalized;
+            }
+            else if (!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, new Vector3(0, 0, moveDirection.z).normalized, moveDistance))
+            {
+                transform.position += moveSpeed * Time.deltaTime * new Vector3(0, 0, moveDirection.z).normalized;
+            }
+        }
+
+        if (moveDirection.magnitude > 0)
+        {
+            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
+        }
+
+        Debug.Log(moveDirection.magnitude);
 
         currentSpeed = moveDirection.magnitude;
     }
 
     public float GetCurrentSpeed()
     {
-        Debug.Log(currentSpeed);
         return currentSpeed;
     }
 }
