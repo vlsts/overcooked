@@ -20,19 +20,33 @@ public class Player : MonoBehaviour
     private float currentSpeed;
     private const float playerRadius = .7f;
     private const float playerHeight = 2f;
+    private Vector3 lastInteractDirection;
     private BaseCounter selectedCounter;
 
 
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-        else Destroy(Instance);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
     {
+        GameInput.Instance.OnPrimaryInteractAction += GameInput_OnPrimaryInteractAction;
+    }
 
+    private void GameInput_OnPrimaryInteractAction()
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.Interact(this);
+        }
     }
 
     void Update()
@@ -43,15 +57,21 @@ public class Player : MonoBehaviour
 
     private void HandleInteractions()
     {
-        Vector3 raycastDirection = transform.forward;
+        Vector2 inputVector = GameInput.Instance.GetMovementVector();
+        Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
         float raycastDistance = 2f;
 
-        if (Physics.Raycast(transform.position + Vector3.up * (playerHeight/2), raycastDirection, out RaycastHit raycastHit, raycastDistance, countersLayerMask))
+        if (moveDirection != Vector3.zero)
+            lastInteractDirection = moveDirection;
+
+        if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit raycastHit, raycastDistance, countersLayerMask))
         {
             if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter))
             {
-                selectedCounter = selectedCounter != baseCounter ? baseCounter : null;
+                if (baseCounter != selectedCounter)
+                    selectedCounter = baseCounter;
             }
+            else selectedCounter = null;
         }
         else
         {

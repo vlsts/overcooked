@@ -1,19 +1,33 @@
+using System;
 using UnityEngine;
 
 public class GameInput : MonoBehaviour
 {
+    public event Action OnPrimaryInteractAction;
+
     private PlayerInputActions playerInputActions;
-    
+
     public static GameInput Instance { get; private set; }
 
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-        else Destroy(Instance);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
+        playerInputActions.Player.PrimaryInteract.performed += PrimaryInteract_performed;
+    }
+
+    private void PrimaryInteract_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnPrimaryInteractAction?.Invoke();
     }
 
     public Vector2 GetMovementVector()
