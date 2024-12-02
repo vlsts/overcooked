@@ -1,17 +1,27 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
 
 public class Player : MonoBehaviour
 {
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public class OnSelectedCounterChangedEventArgs : EventArgs
+    {
+        public BaseCounter selectedCounter;
+    }
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private LayerMask countersLayerMask;
 
+    public static Player Instance { get; private set; }
+    
     private float currentSpeed;
     private const float playerRadius = .7f;
     private const float playerHeight = 2f;
+    private BaseCounter selectedCounter;
 
-    public static Player Instance { get; private set; }
 
     private void Awake()
     {
@@ -27,7 +37,28 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        HandleInteractions();
         HandlePlayerMovement();
+    }
+
+    private void HandleInteractions()
+    {
+        Vector3 raycastDirection = transform.forward;
+        float raycastDistance = 2f;
+
+        if (Physics.Raycast(transform.position + Vector3.up * (playerHeight/2), raycastDirection, out RaycastHit raycastHit, raycastDistance, countersLayerMask))
+        {
+            if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter))
+            {
+                selectedCounter = selectedCounter != baseCounter ? baseCounter : null;
+            }
+        }
+        else
+        {
+            selectedCounter = null;
+        }
+
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs { selectedCounter = selectedCounter });
     }
 
     void HandlePlayerMovement()
