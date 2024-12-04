@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class SupplyCounter : BaseCounter
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public event Action OnSupplyCounterOpened;
+    
     void Start()
     {
         
@@ -16,6 +18,6 @@ public class SupplyCounter : BaseCounter
 
     public override void Interact(Player player)
     {
-        Debug.Log("SupplyCounter.Interact()");
+        OnSupplyCounterOpened?.Invoke();
     }
 }
