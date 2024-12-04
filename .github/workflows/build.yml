@@ -37,6 +37,7 @@ jobs:
           unityVersion: 6000.0.22f1
           buildName: x64
           buildsPath: unityreleases
+          runAsHostUser: true
       
       - name: Build project (Windows x32)
         uses: game-ci/unity-builder@v4
@@ -50,6 +51,7 @@ jobs:
           unityVersion: 6000.0.22f1
           buildName: x32
           buildsPath: unityreleases
+          runAsHostUser: true
           
       - name: Upload built game as artifact
         uses: actions/upload-artifact@v3
