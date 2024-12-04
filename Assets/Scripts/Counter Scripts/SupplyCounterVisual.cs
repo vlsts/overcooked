@@ -18,12 +18,6 @@ public class SupplyCounterVisual : MonoBehaviour
         supplyParentCounter.OnSupplyCounterOpened += SupplyParentCounter_OnSupplyCounterOpened;
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
-
     private void SupplyParentCounter_OnSupplyCounterOpened()
     {
         animator.SetTrigger(INTERACT);
