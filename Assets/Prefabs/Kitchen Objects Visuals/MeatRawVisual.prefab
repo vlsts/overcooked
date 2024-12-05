@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2967193430977719934}
   - component: {fileID: 8960436370494969876}
   m_Layer: 0
-  m_Name: MeatBurned
+  m_Name: MeatRawVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 96771bbe8b3937645abe3d3deb35a243, type: 2}
+  - {fileID: 2100000, guid: 5d8b121dd78e82545a39ca4065cf899e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SupplyCounter : BaseCounter
 {
+    [SerializeField] private KitchenObjectSO kitchenObjectSO;
+
     public event Action OnSupplyCounterOpened;
     
     void Start()

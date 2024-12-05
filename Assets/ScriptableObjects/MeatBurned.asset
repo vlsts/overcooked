@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a456098b6f24f4cb636f288afc2334, type: 3}
   m_Name: MeatBurned
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3167947843034226463, guid: 433291b615d707a4eb23a5d7c490ce51, type: 3}
+  prefab: {fileID: 9130958704228727036, guid: c7c3c12f0d4a9cf4498726ab4b17d7fe, type: 3}
   objectName: MeatBurned

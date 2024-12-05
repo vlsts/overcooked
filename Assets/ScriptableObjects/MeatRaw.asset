@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a456098b6f24f4cb636f288afc2334, type: 3}
   m_Name: MeatRaw
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3167947843034226463, guid: 5c37d5d2f6108fa498a9e63ca8ca2150, type: 3}
+  prefab: {fileID: 4353442167002160397, guid: c02c2090dbb2b784490c1efdeedd2f42, type: 3}
+  sprite: {fileID: 21300000, guid: d03979e94c7a60848baa7e2e4a6fc29c, type: 3}
   objectName: MeatRaw

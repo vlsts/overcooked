@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4960866854972158676}
   - component: {fileID: 8631502810131565227}
   m_Layer: 0
-  m_Name: Tomato
+  m_Name: TomatoVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

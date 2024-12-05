@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a456098b6f24f4cb636f288afc2334, type: 3}
   m_Name: Plate
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6282115902366134790, guid: e5feeca6fbda52e49bcd84b76aa1aae1, type: 3}
+  prefab: {fileID: 3238525597882591623, guid: bc9e60b37e379c34b9910740891c8e41, type: 3}
   objectName: Plate

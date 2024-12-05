@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a456098b6f24f4cb636f288afc2334, type: 3}
   m_Name: MeetCooked
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3167947843034226463, guid: 569e7efde92d97e4b84a8fa4d9a0b669, type: 3}
+  prefab: {fileID: 8725121301048378020, guid: 255891a267c28e445bbb7643223accea, type: 3}
   objectName: MeatCooked
