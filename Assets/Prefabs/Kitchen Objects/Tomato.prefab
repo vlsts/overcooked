@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ddda40b39473d4780bd4ac04da4939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kitchenObjectSO: {fileID: 0}
 --- !u!1001 &3139247561311520988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63,7 +64,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9046825882883939950, guid: 8aca9286b3b32cd4dbe935746928c244, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 9046825882883939950, guid: 8aca9286b3b32cd4dbe935746928c244, type: 3}
       propertyPath: m_LocalPosition.z
