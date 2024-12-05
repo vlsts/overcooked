@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Plate
   m_EditorClassIdentifier: 
   prefab: {fileID: 3238525597882591623, guid: bc9e60b37e379c34b9910740891c8e41, type: 3}
+  sprite: {fileID: 21300000, guid: 97c6848edc6569c46a332adc6c9a39ec, type: 3}
   objectName: Plate

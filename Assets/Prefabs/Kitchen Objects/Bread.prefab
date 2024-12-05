@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ddda40b39473d4780bd4ac04da4939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kitchenObjectSO: {fileID: 0}
 --- !u!1001 &8061229810356750775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55,15 +56,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6946811017182200828, guid: 0ad503b5255259f4d950fe86755f48a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.292
       objectReference: {fileID: 0}
     - target: {fileID: 6946811017182200828, guid: 0ad503b5255259f4d950fe86755f48a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.015
       objectReference: {fileID: 0}
     - target: {fileID: 6946811017182200828, guid: 0ad503b5255259f4d950fe86755f48a5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.346
       objectReference: {fileID: 0}
     - target: {fileID: 6946811017182200828, guid: 0ad503b5255259f4d950fe86755f48a5, type: 3}
       propertyPath: m_LocalRotation.w
