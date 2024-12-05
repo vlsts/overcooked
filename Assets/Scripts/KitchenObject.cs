@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class KitchenObject : MonoBehaviour
 {
+    [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
+    private IKitchenObjectParent kitchenObjectParent;
 
     void Start()
     {
@@ -12,5 +14,35 @@ public class KitchenObject : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public KitchenObjectSO GetKitchenObjectSO()
+    {
+        return kitchenObjectSO;
+    }
+
+    public void SetKitchenObjectParent(IKitchenObjectParent newKitchenObjectParent)
+    {
+        if (kitchenObjectParent != null)
+        {
+            kitchenObjectParent.RemoveKitchenObject();
+        }
+        
+        kitchenObjectParent = newKitchenObjectParent;
+
+        kitchenObjectParent.SetKitchenObject(this);
+
+        transform.parent = kitchenObjectParent.GetHoldPoint();
+        transform.localPosition = Vector3.zero;
+    }
+
+    public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent newKitchenObjectParent)
+    {
+
+        Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
+        KitchenObject kitchenObject = kitchenObjectTransform.GetComponent<KitchenObject>();
+        kitchenObject.SetKitchenObjectParent(newKitchenObjectParent);
+
+        return kitchenObject;
     }
 }

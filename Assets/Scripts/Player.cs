@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IKitchenObjectParent
 {
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private LayerMask countersLayerMask;
+    [SerializeField] private Transform holdPoint;
+
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
         public BaseCounter selectedCounter;
     }
 
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float rotationSpeed;
-    [SerializeField] private LayerMask countersLayerMask;
 
     public static Player Instance { get; private set; }
     
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
     private const float playerHeight = 2f;
     private Vector3 lastInteractDirection;
     private BaseCounter selectedCounter;
+    private KitchenObject kitchenObject;
 
 
     private void Awake()
@@ -111,5 +114,35 @@ public class Player : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return currentSpeed;
+    }
+
+    public KitchenObject GetKitchenObject()
+    {
+        return kitchenObject;
+    }
+    
+    public bool SetKitchenObject(KitchenObject pickedKitchenObject)
+    {
+        if (!kitchenObject)
+        {
+            kitchenObject = pickedKitchenObject;
+            return true;
+        }
+        return false;
+    }
+    
+    public void RemoveKitchenObject()
+    {
+        kitchenObject = null;
+    }
+
+    public Transform GetHoldPoint()
+    {
+        return holdPoint;
+    }
+
+    public bool HasKitchenObject()
+    {
+        return kitchenObject != null;
     }
 }

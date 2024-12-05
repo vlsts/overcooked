@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class ClearCounter : BaseCounter
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -16,6 +14,17 @@ public class ClearCounter : BaseCounter
 
     public override void Interact(Player player)
     {
-        Debug.Log("ClearCounter.Interact()");
+        if (!HasKitchenObject() && Player.Instance.HasKitchenObject())
+        {
+            SetKitchenObject(Player.Instance.GetKitchenObject());
+            GetKitchenObject().SetKitchenObjectParent(this);
+        }
+        else if (!Player.Instance.HasKitchenObject() && HasKitchenObject())
+        {
+            if (Player.Instance.SetKitchenObject(GetKitchenObject())) 
+            {
+                Player.Instance.GetKitchenObject().SetKitchenObjectParent(Player.Instance);
+            }
+        }
     }
 }
