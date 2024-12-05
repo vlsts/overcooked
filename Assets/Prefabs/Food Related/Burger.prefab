@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 7804775796109973245}
   - component: {fileID: 3667381989915637698}
   m_Layer: 0
-  m_Name: salad
+  m_Name: lettuce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
