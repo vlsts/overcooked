@@ -37,4 +37,16 @@ public class GameInput : MonoBehaviour
 
         return inputVector;
     }
+
+    public void ToggleMovement(bool isWashing)
+    {
+        if (isWashing) 
+        {
+            playerInputActions.Player.Move.Disable();
+        }
+        else
+        {
+            playerInputActions.Player.Move.Enable();
+        }
+    }
 }

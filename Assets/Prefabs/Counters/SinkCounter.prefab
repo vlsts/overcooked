@@ -230,6 +230,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SinkCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 8054209769538391004, guid: c09ebdc00ae314249aaecd894263cafc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054209769538391004, guid: c09ebdc00ae314249aaecd894263cafc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.817
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -241,6 +249,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5817726201595017801}
   m_SourcePrefab: {fileID: 100100000, guid: c09ebdc00ae314249aaecd894263cafc, type: 3}
+--- !u!4 &4291834439359996721 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8054209769538391004, guid: c09ebdc00ae314249aaecd894263cafc, type: 3}
+  m_PrefabInstance: {fileID: 6073638126143023341}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4414998061430617941 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7569667972971241400, guid: c09ebdc00ae314249aaecd894263cafc, type: 3}
@@ -258,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5cb43f6ccfb9646ac2774e6ae89aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holdPoint: {fileID: 4291834439359996721}
 --- !u!4 &6271072722563146429 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 238328870703630928, guid: c09ebdc00ae314249aaecd894263cafc, type: 3}

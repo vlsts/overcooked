@@ -36,14 +36,14 @@ public class KitchenObject : MonoBehaviour
         transform.localPosition = Vector3.zero;
     }
 
-    public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent newKitchenObjectParent)
+    public static bool TrySpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent newKitchenObjectParent)
     {
         if (newKitchenObjectParent.HasKitchenObject())
-            return null;
+            return false;
         Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
         KitchenObject kitchenObject = kitchenObjectTransform.GetComponent<KitchenObject>();
         kitchenObject.SetKitchenObjectParent(newKitchenObjectParent);
 
-        return kitchenObject;
+        return true;
     }
 }

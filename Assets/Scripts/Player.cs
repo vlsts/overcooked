@@ -46,10 +46,20 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void GameInput_OnPrimaryInteractAction()
     {
-        if (selectedCounter != null)
+        if (!selectedCounter)
+            return;
+        if (selectedCounter is SinkCounter sinkCounter)
         {
-            selectedCounter.Interact(this);
-        }
+            sinkCounter.OnTapToggle += SinkCounter_OnTapToggle;
+        }    
+        selectedCounter.Interact(this);
+    }
+
+    private void SinkCounter_OnTapToggle(bool isWashing)
+    {
+        if (!isWashing)
+            (selectedCounter as SinkCounter).OnTapToggle -= SinkCounter_OnTapToggle;
+        GameInput.Instance.ToggleMovement(isWashing);
     }
 
     void Update()

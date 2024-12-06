@@ -3,21 +3,17 @@ using UnityEngine;
 
 public class SinkCounter : BaseCounter
 {
-    public event Action OnWashingDish;
-
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public event Action<bool> OnTapToggle; 
+    private bool isWashing = false; 
 
     public override void Interact(Player player)
     {
-        OnWashingDish?.Invoke();
+        isWashing = !isWashing; 
+        OnTapToggle?.Invoke(isWashing); 
+    }
+
+    public bool IsWashing()
+    {
+        return isWashing;
     }
 }

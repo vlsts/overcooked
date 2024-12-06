@@ -20,7 +20,7 @@ public class SupplyCounter : BaseCounter
 
     public override void Interact(Player player)
     {
-        KitchenObject.SpawnKitchenObject(kitchenObjectSO, Player.Instance);
-        OnSupplyCounterOpened?.Invoke();
+        if (KitchenObject.TrySpawnKitchenObject(kitchenObjectSO, Player.Instance))
+            OnSupplyCounterOpened?.Invoke();
     }
 }

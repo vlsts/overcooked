@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SinkCounterVisual : MonoBehaviour
@@ -5,13 +6,21 @@ public class SinkCounterVisual : MonoBehaviour
     [SerializeField] private SinkCounter sinkParentCounter;
     [SerializeField] private ParticleSystem waterflow;
 
+
     void Start()
     {
-        sinkParentCounter.OnWashingDish += SinkParentCounter_OnWashingDish;
+        sinkParentCounter.OnTapToggle += SinkParentCounter_OnTapToggle;
     }
 
-    private void SinkParentCounter_OnWashingDish()
+    private void SinkParentCounter_OnTapToggle(bool isWashing)
     {
-        waterflow.Play();
+        if (isWashing)
+        {
+            waterflow.Play();
+        }
+        else
+        {
+            waterflow.Stop();
+        }
     }
 }
