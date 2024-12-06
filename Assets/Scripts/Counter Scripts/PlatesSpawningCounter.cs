@@ -6,8 +6,8 @@ public class PlatesSpawningCounter : BaseCounter
 {
     [SerializeField] private KitchenObjectSO plateKitchenObjectSO;
 
-    //public event EventHandler OnPlateSpawned;
-    //public event EventHandler OnPlateTaken;
+    public event Action OnPlateSpawned;
+    public event Action OnPlateTaken;
 
     private const float spawnWaitTime = 4f;
     private int platesSpawned = 0;
@@ -29,7 +29,7 @@ public class PlatesSpawningCounter : BaseCounter
             {
                 platesSpawned++;
                 Debug.Log($"Spawned plate {platesSpawned}");
-                //OnPlateSpawned?.Invoke(this, EventArgs.Empty);
+                OnPlateSpawned?.Invoke();
             }
         }
     }
@@ -39,15 +39,16 @@ public class PlatesSpawningCounter : BaseCounter
         if (Player.Instance.HasKitchenObject())
         {
             //No plates at the moment
-            Debug.Log("Player has object?");
         }
         else
         {
-            Debug.Log("Player has no kitchen object");
             if (platesSpawned > 0)
             {
-                Debug.Log("Give plate");
-                KitchenObject.TrySpawnKitchenObject(plateKitchenObjectSO, Player.Instance);
+                if (KitchenObject.TrySpawnKitchenObject(plateKitchenObjectSO, Player.Instance))
+                {
+                    platesSpawned--;
+                    OnPlateTaken?.Invoke();
+                }
             }
         }
     }
