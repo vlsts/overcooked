@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CuttingCounter : BaseCounter
 {
     [SerializeField] private List<CuttableFoodSO> cuttableFoods;
+
+    public event Action OnObjectCut;
 
     private int currentCuts;
     private CuttableFoodSO currentCuttableObject;
@@ -40,12 +43,16 @@ public class CuttingCounter : BaseCounter
 
     public override void InteractSecondary(Player player)
     {
-        currentCuts++;
-        if (currentCuts >= currentCuttableObject.necessaryCuts)
+        if (GetKitchenObject().GetKitchenObjectSO().objectName == currentCuttableObject.originalFood.objectName)
         {
-            GetKitchenObject().DestroySelf();
-            KitchenObject.TrySpawnKitchenObject(currentCuttableObject.cutFood, this);
-            currentCuts = 0;
+            currentCuts++;
+            OnObjectCut?.Invoke();
+            if (currentCuts >= currentCuttableObject.necessaryCuts)
+            {
+                GetKitchenObject().DestroySelf();
+                KitchenObject.TrySpawnKitchenObject(currentCuttableObject.cutFood, this);
+                currentCuts = 0;
+            }
         }
     }
 }
