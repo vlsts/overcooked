@@ -21,6 +21,11 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
         Debug.Log("BaseCounter.Interact()");
     }
 
+    public virtual void InteractSecondary(Player player)
+    {
+        Debug.Log("BaseCounter.InteractSecondary()");
+    }
+
     public bool SetKitchenObject(KitchenObject placedKitchenObject)
     {
         if (!kitchenObject)

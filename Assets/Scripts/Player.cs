@@ -42,6 +42,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     void Start()
     {
         GameInput.Instance.OnPrimaryInteractAction += GameInput_OnPrimaryInteractAction;
+        GameInput.Instance.OnSecondaryInteractAction += GameInput_OnSecondaryInteractAction;
     }
 
     private void GameInput_OnPrimaryInteractAction()
@@ -53,6 +54,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             sinkCounter.OnTapToggle += SinkCounter_OnTapToggle;
         }    
         selectedCounter.Interact(this);
+    }
+
+    private void GameInput_OnSecondaryInteractAction()
+    {
+        if (!selectedCounter)
+            return;
+        selectedCounter.InteractSecondary(this);
     }
 
     private void SinkCounter_OnTapToggle(bool isWashing)

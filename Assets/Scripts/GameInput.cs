@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameInput : MonoBehaviour
 {
     public event Action OnPrimaryInteractAction;
+    public event Action OnSecondaryInteractAction;
 
     private PlayerInputActions playerInputActions;
 
@@ -23,6 +24,12 @@ public class GameInput : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
         playerInputActions.Player.PrimaryInteract.performed += PrimaryInteract_performed;
+        playerInputActions.Player.SecondaryInteract.performed += SecondaryInteract_performed;
+    }
+
+    private void SecondaryInteract_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnSecondaryInteractAction?.Invoke();
     }
 
     private void PrimaryInteract_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
