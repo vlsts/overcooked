@@ -5,6 +5,9 @@ public class CuttingCounter : BaseCounter
 {
     [SerializeField] private List<CuttableFoodSO> cuttableFoods;
 
+    private int currentCuts;
+    private CuttableFoodSO currentCuttableObject;
+
     void Start()
     {
         
@@ -19,8 +22,9 @@ public class CuttingCounter : BaseCounter
     {
         if (!HasKitchenObject() && Player.Instance.HasKitchenObject())
         {
-            if (cuttableFoods.Find(cuttableFood => cuttableFood.originalFood.objectName == Player.Instance.GetKitchenObject().GetKitchenObjectSO().objectName)) 
+            if (cuttableFoods.Find(cuttableFood => cuttableFood.originalFood.objectName == Player.Instance.GetKitchenObject().GetKitchenObjectSO().objectName) is CuttableFoodSO matchingCuttableFood) 
             {
+                currentCuttableObject = matchingCuttableFood;
                 SetKitchenObject(Player.Instance.GetKitchenObject());
                 GetKitchenObject().SetKitchenObjectParent(this);
             }
@@ -31,6 +35,17 @@ public class CuttingCounter : BaseCounter
             {
                 Player.Instance.GetKitchenObject().SetKitchenObjectParent(Player.Instance);
             }
+        }
+    }
+
+    public override void InteractSecondary(Player player)
+    {
+        currentCuts++;
+        if (currentCuts >= currentCuttableObject.necessaryCuts)
+        {
+            GetKitchenObject().DestroySelf();
+            KitchenObject.TrySpawnKitchenObject(currentCuttableObject.cutFood, this);
+            currentCuts = 0;
         }
     }
 }
