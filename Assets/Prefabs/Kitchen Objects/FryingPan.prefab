@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3333298953082624106}
+  - component: {fileID: 9172509676935346629}
   m_Layer: 0
   m_Name: FryingPan
   m_TagString: Untagged
@@ -33,6 +34,19 @@ Transform:
   - {fileID: 1774369410866183835}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9172509676935346629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5906403545004896914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70cd88d04f72c044282839ff48f7c5b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kitchenObjectSO: {fileID: 11400000, guid: c8d7d127633b5fe44b69db5cab35de41, type: 2}
 --- !u!1 &9088526926200175593
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +72,7 @@ Transform:
   m_GameObject: {fileID: 9088526926200175593}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.216, y: 0, z: 0.241}
+  m_LocalPosition: {x: -0.006000012, y: 0.18900013, z: 0.10100001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,15 +92,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5763722556844440551, guid: ccfb8e4e6b307bf4d9a51f20f642431b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 5763722556844440551, guid: ccfb8e4e6b307bf4d9a51f20f642431b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.189
       objectReference: {fileID: 0}
     - target: {fileID: 5763722556844440551, guid: ccfb8e4e6b307bf4d9a51f20f642431b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.14
       objectReference: {fileID: 0}
     - target: {fileID: 5763722556844440551, guid: ccfb8e4e6b307bf4d9a51f20f642431b, type: 3}
       propertyPath: m_LocalRotation.w

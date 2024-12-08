@@ -2,14 +2,10 @@ using UnityEngine;
 
 public class StoveCounter : BaseCounter
 {
-    void Start()
+    private void Awake()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        SetKitchenObject(GetComponentInChildren<FryingPan>());
+        GetKitchenObject().SetKitchenObjectParent(this);
     }
 
     public override void Interact(Player player)
