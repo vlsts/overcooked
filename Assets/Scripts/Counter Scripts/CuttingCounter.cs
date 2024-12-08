@@ -37,6 +37,7 @@ public class CuttingCounter : BaseCounter
             if (Player.Instance.SetKitchenObject(GetKitchenObject())) 
             {
                 Player.Instance.GetKitchenObject().SetKitchenObjectParent(Player.Instance);
+                currentCuts = 0;
             }
         }
     }
