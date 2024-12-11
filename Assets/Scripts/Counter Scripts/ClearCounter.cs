@@ -26,5 +26,12 @@ public class ClearCounter : BaseCounter
                 Player.Instance.GetKitchenObject().SetKitchenObjectParent(Player.Instance);
             }
         }
+        else if (Player.Instance.HasKitchenObject() && HasKitchenObject())
+        {
+            if (GetKitchenObject() is Plate plate)
+            {
+                plate.AddKitchenObject(Player.Instance.GetKitchenObject());
+            }
+        }
     }
 }
