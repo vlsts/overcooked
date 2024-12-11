@@ -1,7 +1,12 @@
+using System;
 using UnityEngine;
 
 public class StoveCounter : BaseCounter
 {
+    public event Action<bool> OnStoveStateChanged;
+
+    private bool isOn = false;
+
     private void Awake()
     {
         SetKitchenObject(GetComponentInChildren<FryingPan>());
@@ -10,10 +15,11 @@ public class StoveCounter : BaseCounter
 
     public override void Interact(Player player)
     {
-        if (!HasKitchenObject() && Player.Instance.HasKitchenObject())
+        if (!HasKitchenObject() && Player.Instance.GetKitchenObject() is FryingPan)
         {
             SetKitchenObject(Player.Instance.GetKitchenObject());
             GetKitchenObject().SetKitchenObjectParent(this);
+
         }
         else if (!Player.Instance.HasKitchenObject() && HasKitchenObject())
         {
@@ -22,5 +28,11 @@ public class StoveCounter : BaseCounter
                 Player.Instance.GetKitchenObject().SetKitchenObjectParent(Player.Instance);
             }
         }
+    }
+
+    public override void InteractSecondary(Player player)
+    {
+        isOn = !isOn;
+        OnStoveStateChanged?.Invoke(isOn);
     }
 }
