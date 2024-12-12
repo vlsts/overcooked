@@ -4,11 +4,61 @@ using UnityEngine;
 
 public class MultiObjectHolder : MonoBehaviour
 {
-    private List<KitchenObject> kitchenObjects = new List<KitchenObject>();
+    private List<KitchenObject> kitchenObjects;
+    private Bread breadOnPlate;
+    private Vector3 startingPositionFoodInsideTheBread;
+
+    private void Awake()
+    {
+        startingPositionFoodInsideTheBread = new Vector3(0, 0.01f, 0);
+        kitchenObjects = new List<KitchenObject>();
+    }
 
     public void AddKitchenObject(KitchenObject kitchenObject)
     {
-        kitchenObjects.Add(kitchenObject);
+        if (kitchenObjects.Contains(kitchenObject))
+            return;
+        if (kitchenObjects.Count == 0)
+        {
+            if (kitchenObject is Bread bread)
+            {
+                breadOnPlate = bread;
+                bread.transform.position = transform.position;
+            }
+
+            kitchenObjects.Add(kitchenObject);
+        }
+        else if (breadOnPlate)
+        {
+            breadOnPlate.LiftTopBreadSlice(kitchenObject.GetKitchenObjectSO().heightOffset / 2);
+            kitchenObjects.Add(kitchenObject);
+            PositionNewObject(kitchenObject);
+        }
+    }
+
+    private void PositionNewObject(KitchenObject kitchenObject)
+    {
+        if (kitchenObjects.Count == 2)
+        {
+            kitchenObject.transform.position += startingPositionFoodInsideTheBread;
+        }
+        else
+        {
+            kitchenObject.transform.position = new Vector3(kitchenObject.transform.position.x, CalculateStackHeightFor(kitchenObject), kitchenObject.transform.position.z);
+        }
+    }
+
+    private float CalculateStackHeightFor(KitchenObject kitchenObject)
+    {
+        float totalHeight = 0.0f;
+        //foreach (var obj in kitchenObjects)
+        //{
+        //    if (obj is not Bread && obj != kitchenObject)
+        //        totalHeight += obj.GetKitchenObjectSO().heightOffset;
+        //}
+        Debug.Log(totalHeight);
+        //return totalHeight;
+        return kitchenObjects[kitchenObjects.Count - 2].transform.position.y + kitchenObject.GetKitchenObjectSO().heightOffset;
     }
 
     public void RemoveKitchenObject(KitchenObject kitchenObject)

@@ -44,6 +44,8 @@ public class CuttingCounter : BaseCounter
 
     public override void InteractSecondary(Player player)
     {
+        if (!HasKitchenObject())
+            return;
         if (GetKitchenObject().GetKitchenObjectSO().objectName == currentCuttableObject.originalFood.objectName)
         {
             currentCuts++;

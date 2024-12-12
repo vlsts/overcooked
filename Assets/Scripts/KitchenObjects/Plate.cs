@@ -40,8 +40,8 @@ public class Plate : KitchenObject, IKitchenObjectParent
     {
         if (IsValidKitchenObject(kitchenObject))
         {
-            multiObjectHolder.AddKitchenObject(kitchenObject);
             kitchenObject.SetKitchenObjectParent(this);
+            multiObjectHolder.AddKitchenObject(kitchenObject);
             return true;
         }
         return false;

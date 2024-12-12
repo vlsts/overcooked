@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6932647631568557278}
-  - component: {fileID: -1171268065334964204}
+  - component: {fileID: 6393928821058888381}
   m_Layer: 0
   m_Name: Bread
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 1132437728004196939}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3}
---- !u!114 &-1171268065334964204
+--- !u!114 &6393928821058888381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,10 +42,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 336930690752885147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ddda40b39473d4780bd4ac04da4939, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d6b5319ac685d641917dff4e98dfff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenObjectSO: {fileID: 11400000, guid: 8ee6d0f7231853d4498a0efd1c7741da, type: 2}
+  topBreadSlice: {fileID: 6486423284180690809}
+  bottomBreadSlice: {fileID: 8423964378991684254}
 --- !u!1001 &8061229810356750775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,5 +108,15 @@ PrefabInstance:
 --- !u!4 &1132437728004196939 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6946811017182200828, guid: 0ad503b5255259f4d950fe86755f48a5, type: 3}
+  m_PrefabInstance: {fileID: 8061229810356750775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6486423284180690809 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3880794808510525134, guid: 0ad503b5255259f4d950fe86755f48a5, type: 3}
+  m_PrefabInstance: {fileID: 8061229810356750775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8423964378991684254 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1961549862731080489, guid: 0ad503b5255259f4d950fe86755f48a5, type: 3}
   m_PrefabInstance: {fileID: 8061229810356750775}
   m_PrefabAsset: {fileID: 0}

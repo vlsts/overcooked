@@ -15,3 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 7878540975693949781, guid: a47c6ef0530024f498fb8a9f81e9c69a, type: 3}
   sprite: {fileID: 21300000, guid: 5c377610f852fdb41b059d8983abb7a8, type: 3}
   objectName: TomatoSlices
+  heightOffset: 0.15
