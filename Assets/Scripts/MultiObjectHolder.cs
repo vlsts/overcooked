@@ -50,14 +50,6 @@ public class MultiObjectHolder : MonoBehaviour
 
     private float CalculateStackHeightFor(KitchenObject kitchenObject)
     {
-        float totalHeight = 0.0f;
-        //foreach (var obj in kitchenObjects)
-        //{
-        //    if (obj is not Bread && obj != kitchenObject)
-        //        totalHeight += obj.GetKitchenObjectSO().heightOffset;
-        //}
-        Debug.Log(totalHeight);
-        //return totalHeight;
         return kitchenObjects[kitchenObjects.Count - 2].transform.position.y + kitchenObject.GetKitchenObjectSO().heightOffset;
     }
 

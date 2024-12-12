@@ -34,6 +34,7 @@ public class KitchenObject : MonoBehaviour
 
         transform.parent = kitchenObjectParent.GetHoldPoint();
         transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
 
     public static bool TrySpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent newKitchenObjectParent)

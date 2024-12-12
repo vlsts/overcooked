@@ -9,6 +9,5 @@ public class FryingPan : KitchenObject
 
     void Update()
     {
-        transform.localRotation = Quaternion.identity;
     }
 }
