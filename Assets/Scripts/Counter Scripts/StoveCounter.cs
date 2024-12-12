@@ -28,6 +28,14 @@ public class StoveCounter : BaseCounter
                 Player.Instance.GetKitchenObject().SetKitchenObjectParent(Player.Instance);
             }
         }
+        else if (Player.Instance.HasKitchenObject() && HasKitchenObject())
+        {
+            if (GetKitchenObject() is FryingPan fryingPan)
+            {
+                fryingPan.SetKitchenObject(Player.Instance.GetKitchenObject());
+                fryingPan.GetKitchenObject().SetKitchenObjectParent(fryingPan);
+            }
+        }
     }
 
     public override void InteractSecondary(Player player)

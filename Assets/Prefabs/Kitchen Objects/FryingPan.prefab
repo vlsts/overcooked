@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenObjectSO: {fileID: 11400000, guid: c8d7d127633b5fe44b69db5cab35de41, type: 2}
+  holdPoint: {fileID: 1774369410866183835}
+  meatKitchenObjectSO: {fileID: 11400000, guid: f9c1bfe201bbb7742b3038c8b85800c9, type: 2}
 --- !u!1 &9088526926200175593
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,12 +23,15 @@ public class KitchenObject : MonoBehaviour
 
     public void SetKitchenObjectParent(IKitchenObjectParent newKitchenObjectParent)
     {
+        Debug.Log(kitchenObjectParent);
         if (kitchenObjectParent != null)
         {
             kitchenObjectParent.RemoveKitchenObject();
         }
         
         kitchenObjectParent = newKitchenObjectParent;
+
+        Debug.Log(kitchenObjectParent);
 
         kitchenObjectParent.SetKitchenObject(this);
 
