@@ -1,3 +1,4 @@
+using System.Collections;
 using System;
 using UnityEngine;
 
@@ -42,5 +43,10 @@ public class StoveCounter : BaseCounter
     {
         isOn = !isOn;
         OnStoveStateChanged?.Invoke(isOn);
+    }
+
+    public bool IsOn()
+    {
+        return isOn;
     }
 }

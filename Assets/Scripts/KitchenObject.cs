@@ -21,7 +21,7 @@ public class KitchenObject : MonoBehaviour
         return kitchenObjectSO;
     }
 
-    public void SetKitchenObjectParent(IKitchenObjectParent newKitchenObjectParent)
+    public virtual void SetKitchenObjectParent(IKitchenObjectParent newKitchenObjectParent)
     {
         if (kitchenObjectParent != null)
         {

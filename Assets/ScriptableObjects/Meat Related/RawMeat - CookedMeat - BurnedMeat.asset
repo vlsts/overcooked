@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e4d9e796f26bc24ab93a31993f1aea1, type: 3}
+  m_Name: RawMeat - CookedMeat - BurnedMeat
+  m_EditorClassIdentifier: 
+  rawMeat: {fileID: 11400000, guid: f9c1bfe201bbb7742b3038c8b85800c9, type: 2}
+  cookedMeat: {fileID: 11400000, guid: 7f788d7943fcc6e4fa629acd53e4918c, type: 2}
+  burnedMeat: {fileID: 11400000, guid: 217df0857a9e8bb4081aac58f8268a0b, type: 2}

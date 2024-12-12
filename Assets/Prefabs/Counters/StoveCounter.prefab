@@ -5316,6 +5316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 2221394387273086248}
+  meatTransformationSO: {fileID: 11400000, guid: afa36bfd1a77ceb44af561687b19417e, type: 2}
 --- !u!4 &2221394387273086248 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8054209769538391004, guid: c09ebdc00ae314249aaecd894263cafc, type: 3}
