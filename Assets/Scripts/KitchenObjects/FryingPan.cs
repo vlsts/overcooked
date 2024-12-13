@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FryingPan : KitchenObject, IKitchenObjectParent
@@ -6,6 +8,9 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
     [SerializeField] private Transform holdPoint;
     [SerializeField] private KitchenObjectSO meatKitchenObjectSO;
     [SerializeField] private MeatTransformationSO meatTransformationSO;
+
+    public event Action<bool> OnFrying;
+    public event Action<bool> OnBurning;
 
     private KitchenObject meatKitchenObject;
     private StoveCounter stoveCounter;
@@ -32,6 +37,7 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
         }
         else
         {
+            OnBurning?.Invoke(false);
             StopCooking();
         }
     }
@@ -48,6 +54,7 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
     {
         if (meatKitchenObject.GetKitchenObjectSO().name == meatTransformationSO.rawMeat.name)
         {
+            OnFrying?.Invoke(true);
             yield return new WaitForSeconds(3f);
             if (meatKitchenObject.GetKitchenObjectSO() == meatTransformationSO.rawMeat)
             {
@@ -56,10 +63,12 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
         }
         if (meatKitchenObject.GetKitchenObjectSO().name == meatTransformationSO.cookedMeat.name)
         {
+            OnFrying?.Invoke(true);
             yield return new WaitForSeconds(5f);
             if (meatKitchenObject.GetKitchenObjectSO() == meatTransformationSO.cookedMeat)
             {
                 ChangeMeatState(meatTransformationSO.burnedMeat);
+                OnBurning?.Invoke(true);
             }
         }
         StopCooking();
@@ -81,6 +90,7 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
     {
         if (cookingCoroutine != null)
         {
+            OnFrying?.Invoke(false);
             StopCoroutine(cookingCoroutine);
             cookingCoroutine = null;
         }
@@ -111,6 +121,10 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
         if (kitchenObject.GetKitchenObjectSO().name == meatKitchenObjectSO.name)
         {
             meatKitchenObject = kitchenObject;
+            if (stoveCounter.IsOn())
+            {
+                StartCooking();
+            }
             return true;
         }
         return false;
@@ -126,6 +140,7 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
         else
         {
             StopCooking();
+            OnBurning?.Invoke(false);
         }
     }
 }
