@@ -15,4 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 8725121301048378020, guid: 255891a267c28e445bbb7643223accea, type: 3}
   sprite: {fileID: 21300000, guid: 1bdbcc95326446e4f9a1173f843cbccb, type: 3}
   objectName: MeatCooked
-  heightOffset: 0.25
+  heightOffset: 0.15

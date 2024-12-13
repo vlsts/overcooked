@@ -47,11 +47,6 @@ public class Plate : KitchenObject, IKitchenObjectParent
         return false;
     }
 
-    public void RemoveKitchenObject(KitchenObject kitchenObject)
-    {
-        multiObjectHolder.RemoveKitchenObject(kitchenObject);
-    }
-
     public List<KitchenObject> GetAllKitchenObjects()
     {
         return multiObjectHolder.GetAllKitchenObjects();
@@ -78,8 +73,9 @@ public class Plate : KitchenObject, IKitchenObjectParent
     {
         foreach (var kitchenObject in multiObjectHolder.GetAllKitchenObjects())
         {
-            multiObjectHolder.RemoveKitchenObject(kitchenObject);
+            Destroy(kitchenObject.gameObject);
         }
+        multiObjectHolder.RemoveAllKitchenObjects();
     }
 
     public bool SetKitchenObject(KitchenObject kitchenObject)

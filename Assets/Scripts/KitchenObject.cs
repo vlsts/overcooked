@@ -27,7 +27,6 @@ public class KitchenObject : MonoBehaviour
         {
             kitchenObjectParent.RemoveKitchenObject();
         }
-        
         kitchenObjectParent = newKitchenObjectParent;
 
         kitchenObjectParent.SetKitchenObject(this);

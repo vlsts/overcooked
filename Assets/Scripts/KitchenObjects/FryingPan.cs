@@ -52,7 +52,7 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
 
     private IEnumerator CookingProcess()
     {
-        if (meatKitchenObject.GetKitchenObjectSO().name == meatTransformationSO.rawMeat.name)
+        if (meatKitchenObject?.GetKitchenObjectSO().name == meatTransformationSO.rawMeat.name)
         {
             OnFrying?.Invoke(true);
             yield return new WaitForSeconds(3f);
@@ -61,7 +61,7 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
                 ChangeMeatState(meatTransformationSO.cookedMeat);
             }
         }
-        if (meatKitchenObject.GetKitchenObjectSO().name == meatTransformationSO.cookedMeat.name)
+        if (meatKitchenObject?.GetKitchenObjectSO().name == meatTransformationSO.cookedMeat.name)
         {
             OnFrying?.Invoke(true);
             yield return new WaitForSeconds(5f);
@@ -113,7 +113,10 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
 
     public void RemoveKitchenObject()
     {
-        meatKitchenObject = null;
+        if (meatKitchenObject != null)
+        {
+            meatKitchenObject = null;
+        }
     }
 
     public bool SetKitchenObject(KitchenObject kitchenObject)
@@ -121,7 +124,7 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
         if (kitchenObject.GetKitchenObjectSO().name == meatKitchenObjectSO.name)
         {
             meatKitchenObject = kitchenObject;
-            if (stoveCounter.IsOn())
+            if ((bool)(stoveCounter?.IsOn()))
             {
                 StartCooking();
             }

@@ -30,7 +30,37 @@ public class ClearCounter : BaseCounter
         {
             if (GetKitchenObject() is Plate plate)
             {
-                plate.AddKitchenObject(Player.Instance.GetKitchenObject());
+                if (Player.Instance.GetKitchenObject() is not IKitchenObjectParent)
+                {
+                    plate.AddKitchenObject(Player.Instance.GetKitchenObject());
+                }
+                else if (Player.Instance.GetKitchenObject() is FryingPan fryingPan && fryingPan.HasKitchenObject())
+                {
+                    plate.AddKitchenObject(fryingPan.GetKitchenObject());
+                }
+            }
+            else if (GetKitchenObject() is FryingPan fryingPan)
+            {
+                if (Player.Instance.GetKitchenObject() is not IKitchenObjectParent)
+                {
+                    if (fryingPan.SetKitchenObject(Player.Instance.GetKitchenObject()))
+                        fryingPan.GetKitchenObject().SetKitchenObjectParent(fryingPan);
+                }
+            }
+            else
+            {
+                if (Player.Instance.GetKitchenObject() is IKitchenObjectParent)
+                {
+                    if (Player.Instance.GetKitchenObject() is Plate playersPlate)
+                    {
+                        playersPlate.AddKitchenObject(GetKitchenObject());
+                    }
+                    else if (Player.Instance.GetKitchenObject() is FryingPan playersFryingPan)
+                    {
+                        if (playersFryingPan.SetKitchenObject(GetKitchenObject()))
+                            playersFryingPan.GetKitchenObject().SetKitchenObjectParent(playersFryingPan);
+                    }
+                }
             }
         }
     }
