@@ -1,77 +1,129 @@
 using System;
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class FryingPan : KitchenObject, IKitchenObjectParent
+public class FryingPan : KitchenObject, IKitchenObjectParent, IProgressable
 {
     [SerializeField] private Transform holdPoint;
     [SerializeField] private KitchenObjectSO meatKitchenObjectSO;
     [SerializeField] private MeatTransformationSO meatTransformationSO;
 
     public event Action<bool> OnFrying;
-    public event Action<bool> OnBurning;
+    public event Action<bool> OnBurningStarted;
+    public event EventHandler<IProgressable.OnProgressChangedEventArgs> OnProgressChanged;
 
     private KitchenObject meatKitchenObject;
     private StoveCounter stoveCounter;
-    private Coroutine cookingCoroutine;
+
+    private float cookingTime = 3f;
+    private float burningTime = 5f;
+
+    private float elapsedTime = 0f;
+    private bool isCooking = false;
+    private bool isBurning = false;
 
     void Start()
     {
         stoveCounter = GetComponentInParent<StoveCounter>();
-        stoveCounter.OnStoveStateChanged += StoveCounter_OnStoveStateChanged; ;
+        stoveCounter.OnStoveStateChanged += StoveCounter_OnStoveStateChanged;
     }
 
     void Update()
     {
+        if (isCooking || isBurning)
+        {
+            elapsedTime += Time.deltaTime;
+
+            if (isCooking)
+            {
+                OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
+                {
+                    currentProgress = elapsedTime / cookingTime
+                });
+
+                if (elapsedTime >= cookingTime)
+                {
+                    if (meatKitchenObject?.GetKitchenObjectSO().name == meatTransformationSO.rawMeat.name)
+                    {
+                        ChangeMeatState(meatTransformationSO.cookedMeat);
+                    }
+                    StartBurning();
+                }
+            }
+            else if (isBurning)
+            {
+                OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
+                {
+                    currentProgress = elapsedTime / burningTime
+                });
+
+                if (elapsedTime >= burningTime)
+                {
+                    if (meatKitchenObject?.GetKitchenObjectSO().name == meatTransformationSO.cookedMeat.name)
+                    {
+                        ChangeMeatState(meatTransformationSO.burnedMeat);
+                        OnBurningStarted?.Invoke(true);
+                        OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
+                        {
+                            currentProgress = 0f
+                        });
+                        isBurning = false;
+                    }
+                }
+            }
+        }
     }
 
     private void StoveCounter_OnStoveStateChanged(bool isOn)
     {
         if (isOn)
         {
-            if (meatKitchenObject != null)
+            if (meatKitchenObject != null && stoveCounter != null)
             {
                 StartCooking();
             }
         }
         else
         {
-            OnBurning?.Invoke(false);
+            OnBurningStarted?.Invoke(false);
             StopCooking();
         }
     }
 
     private void StartCooking()
     {
-        if (cookingCoroutine == null)
+        if (meatKitchenObject?.GetKitchenObjectSO().name == meatTransformationSO.rawMeat.name)
         {
-            cookingCoroutine = StartCoroutine(CookingProcess());
+            isCooking = true;
+            isBurning = false;
+            elapsedTime = 0f;
+            OnFrying?.Invoke(true);
+        }
+        else if (meatKitchenObject?.GetKitchenObjectSO().name == meatTransformationSO.cookedMeat.name)
+        {
+            StartBurning();
         }
     }
 
-    private IEnumerator CookingProcess()
+    private void StartBurning()
     {
-        if (meatKitchenObject?.GetKitchenObjectSO().name == meatTransformationSO.rawMeat.name)
+        isCooking = false;
+        isBurning = true;
+        elapsedTime = 0f;
+        OnFrying?.Invoke(false);  
+    }
+
+    private void StopCooking()
+    {
+        isCooking = false;
+        isBurning = false;
+
+        OnFrying?.Invoke(false);
+        OnBurningStarted?.Invoke(false);
+        OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
         {
-            OnFrying?.Invoke(true);
-            yield return new WaitForSeconds(3f);
-            if (meatKitchenObject.GetKitchenObjectSO() == meatTransformationSO.rawMeat)
-            {
-                ChangeMeatState(meatTransformationSO.cookedMeat);
-            }
-        }
-        if (meatKitchenObject?.GetKitchenObjectSO().name == meatTransformationSO.cookedMeat.name)
-        {
-            OnFrying?.Invoke(true);
-            yield return new WaitForSeconds(5f);
-            if (meatKitchenObject.GetKitchenObjectSO() == meatTransformationSO.cookedMeat)
-            {
-                ChangeMeatState(meatTransformationSO.burnedMeat);
-                OnBurning?.Invoke(true);
-            }
-        }
-        StopCooking();
+            currentProgress = 0f
+        });
+        elapsedTime = 0f;
     }
 
     private void ChangeMeatState(KitchenObjectSO newMeatSO)
@@ -83,16 +135,6 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
             KitchenObject newMeat = Instantiate(newMeatSO.prefab).GetComponent<KitchenObject>();
             newMeat.SetKitchenObjectParent(this);
             meatKitchenObject = newMeat;
-        }
-    }
-
-    private void StopCooking()
-    {
-        if (cookingCoroutine != null)
-        {
-            OnFrying?.Invoke(false);
-            StopCoroutine(cookingCoroutine);
-            cookingCoroutine = null;
         }
     }
 
@@ -124,7 +166,7 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
         if (kitchenObject.GetKitchenObjectSO().name == meatKitchenObjectSO.name)
         {
             meatKitchenObject = kitchenObject;
-            if ((bool)(stoveCounter?.IsOn()))
+            if (stoveCounter?.IsOn() == true)
             {
                 StartCooking();
             }
@@ -136,14 +178,25 @@ public class FryingPan : KitchenObject, IKitchenObjectParent
     public override void SetKitchenObjectParent(IKitchenObjectParent newKitchenObjectParent)
     {
         base.SetKitchenObjectParent(newKitchenObjectParent);
-        if (newKitchenObjectParent is StoveCounter newStove && newStove.IsOn())
+        if (newKitchenObjectParent is StoveCounter newStove)
         {
-            StartCooking();
+            stoveCounter = newStove;
+            if (stoveCounter.IsOn())
+            {
+                StartCooking();
+            }
         }
         else
         {
+            stoveCounter = null;
             StopCooking();
-            OnBurning?.Invoke(false);
+            OnFrying?.Invoke(false);
+            OnBurningStarted?.Invoke(false);
         }
+    }
+
+    public bool IsBurning()
+    {
+        return isBurning;
     }
 }

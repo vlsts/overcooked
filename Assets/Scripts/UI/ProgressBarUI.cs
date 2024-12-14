@@ -22,8 +22,15 @@ public class ProgressBarUI : MonoBehaviour
 
     private void Progressable_OnProgressChanged(object sender, IProgressable.OnProgressChangedEventArgs e)
     {
+        if (sender is FryingPan fryingPan)
+        {
+            if (fryingPan.IsBurning())
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+        }
         barImage.fillAmount = e.currentProgress;
-
         if (e.currentProgress > 0f && e.currentProgress < 1f)
         {
             gameObject.SetActive(true);

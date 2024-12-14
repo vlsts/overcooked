@@ -5162,6 +5162,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2221394387273086248}
     m_Modifications:
+    - target: {fileID: 905850008229914881, guid: 030c2095004ce4843b670ca975161760, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.757
+      objectReference: {fileID: 0}
     - target: {fileID: 1774369410866183835, guid: 030c2095004ce4843b670ca975161760, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.052
@@ -5213,6 +5217,14 @@ PrefabInstance:
     - target: {fileID: 5906403545004896914, guid: 030c2095004ce4843b670ca975161760, type: 3}
       propertyPath: m_Name
       value: FryingPan
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775923011443636999, guid: 030c2095004ce4843b670ca975161760, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476269332133650906, guid: 030c2095004ce4843b670ca975161760, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.75699997
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5316,7 +5328,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 2221394387273086248}
-  meatTransformationSO: {fileID: 11400000, guid: afa36bfd1a77ceb44af561687b19417e, type: 2}
 --- !u!4 &2221394387273086248 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8054209769538391004, guid: c09ebdc00ae314249aaecd894263cafc, type: 3}

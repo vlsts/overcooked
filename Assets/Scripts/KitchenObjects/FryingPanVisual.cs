@@ -9,7 +9,7 @@ public class FryingPanVisual : MonoBehaviour
     void Start()
     {
         fryingPanParent.OnFrying += FryingPanParent_OnFrying;
-        fryingPanParent.OnBurning += FryingPanParent_OnBurning; ;
+        fryingPanParent.OnBurningStarted += FryingPanParent_OnBurning; ;
     }
 
     private void FryingPanParent_OnBurning(bool isBurning)
