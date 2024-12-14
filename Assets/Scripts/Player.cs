@@ -16,7 +16,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         public BaseCounter selectedCounter;
     }
 
-
     public static Player Instance { get; private set; }
     
     private float currentSpeed;
@@ -80,7 +79,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     {
         Vector2 inputVector = GameInput.Instance.GetMovementVector();
         Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
-        float raycastDistance = 2f;
+        float raycastDistance = 3f;
 
         if (moveDirection != Vector3.zero)
             lastInteractDirection = moveDirection;

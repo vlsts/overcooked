@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CuttingCounter : BaseCounter
+public class CuttingCounter : BaseCounter, IProgressable
 {
     [SerializeField] private List<CuttableFoodSO> cuttableFoods;
 
     public event Action OnObjectCut;
+    public event EventHandler<IProgressable.OnProgressChangedEventArgs> OnProgressChanged;
 
     private int currentCuts;
     private CuttableFoodSO currentCuttableObject;
@@ -28,6 +29,7 @@ public class CuttingCounter : BaseCounter
             if (cuttableFoods.Find(cuttableFood => cuttableFood.originalFood.objectName == Player.Instance.GetKitchenObject().GetKitchenObjectSO().objectName) is CuttableFoodSO matchingCuttableFood) 
             {
                 currentCuttableObject = matchingCuttableFood;
+                OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs { currentProgress = 0 });
                 SetKitchenObject(Player.Instance.GetKitchenObject());
                 GetKitchenObject().SetKitchenObjectParent(this);
             }
@@ -38,6 +40,7 @@ public class CuttingCounter : BaseCounter
             {
                 Player.Instance.GetKitchenObject().SetKitchenObjectParent(Player.Instance);
                 currentCuts = 0;
+                OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs { currentProgress = 0 });
             }
         }
     }
@@ -50,6 +53,10 @@ public class CuttingCounter : BaseCounter
         {
             currentCuts++;
             OnObjectCut?.Invoke();
+            OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
+            {
+                currentProgress = (float)currentCuts / currentCuttableObject.necessaryCuts
+            });
             if (currentCuts >= currentCuttableObject.necessaryCuts)
             {
                 GetKitchenObject().DestroySelf();
