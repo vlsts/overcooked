@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CheeseSlice
   m_EditorClassIdentifier: 
   prefab: {fileID: 9083950478405496689, guid: 3814e1f7628f2e045ac316e949e14cae, type: 3}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: f293a23f4070f1a409d3759483dec5d5, type: 3}
   objectName: CheeseSlice
   heightOffset: 0.1

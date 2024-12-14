@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ public class Plate : KitchenObject, IKitchenObjectParent
 {
     [SerializeField] private List<KitchenObjectSO> servableKitchenObjectsSO;
     [SerializeField] private Transform holdPoint;
+
+    public event Action OnIngredientAdded;
+    public event Action OnClearPlate;
 
     private MultiObjectHolder multiObjectHolder;
 
@@ -42,6 +46,7 @@ public class Plate : KitchenObject, IKitchenObjectParent
         {
             kitchenObject.SetKitchenObjectParent(this);
             multiObjectHolder.AddKitchenObject(kitchenObject);
+            OnIngredientAdded?.Invoke();
             return true;
         }
         return false;
@@ -76,6 +81,7 @@ public class Plate : KitchenObject, IKitchenObjectParent
             Destroy(kitchenObject.gameObject);
         }
         multiObjectHolder.RemoveAllKitchenObjects();
+        OnClearPlate?.Invoke();
     }
 
     public bool SetKitchenObject(KitchenObject kitchenObject)

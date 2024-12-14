@@ -33,8 +33,8 @@ public class StoveCounter : BaseCounter
         {
             if (GetKitchenObject() is FryingPan fryingPan)
             {
-                fryingPan.SetKitchenObject(Player.Instance.GetKitchenObject());
-                fryingPan.GetKitchenObject().SetKitchenObjectParent(fryingPan);
+                if (fryingPan.SetKitchenObject(Player.Instance.GetKitchenObject()))
+                    fryingPan.GetKitchenObject().SetKitchenObjectParent(fryingPan);
             }
         }
     }
