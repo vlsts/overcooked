@@ -15,7 +15,7 @@ public class TrashCounter : BaseCounter
             }
             else if (kitchenObject is FryingPan fryingPan)
             {
-                fryingPan.GetKitchenObject().DestroySelf();
+                fryingPan.GetKitchenObject()?.DestroySelf();
                 fryingPan.RemoveKitchenObject();
             }
             else
