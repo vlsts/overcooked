@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class DeliveryCounter : BaseCounter
 {
-    void Start()
+    public override void Interact(Player player)
     {
-        
-    }
-
-    void Update()
-    {
-        
+        if (Player.Instance.GetKitchenObject() is Plate plate)
+        {
+            if (plate.HasKitchenObject())
+            {
+                DeliveryManager.Instance.DeliverPlate(plate.GetAllKitchenObjects());
+                plate.RemoveKitchenObject();
+            }
+        }
     }
 }
