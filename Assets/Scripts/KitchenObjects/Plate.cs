@@ -59,6 +59,17 @@ public class Plate : KitchenObject, IKitchenObjectParent
         return false;
     }
 
+    public bool IsDirty()
+    {
+        return !isClean;
+    }
+
+    public void Clean()
+    {
+        isClean = true;
+        RemoveKitchenObject();
+    }
+
     public List<KitchenObject> GetAllKitchenObjects()
     {
         return multiObjectHolder.GetAllKitchenObjects();
