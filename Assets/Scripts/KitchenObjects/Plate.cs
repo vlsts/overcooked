@@ -12,6 +12,7 @@ public class Plate : KitchenObject, IKitchenObjectParent
     public event Action OnClearPlate;
 
     private MultiObjectHolder multiObjectHolder;
+    private bool isClean = true;
 
     private void Awake()
     {
@@ -42,12 +43,18 @@ public class Plate : KitchenObject, IKitchenObjectParent
 
     public bool AddKitchenObject(KitchenObject kitchenObject)
     {
-        if (IsValidKitchenObject(kitchenObject))
+        if (IsValidKitchenObject(kitchenObject) && isClean)
         {
             kitchenObject.SetKitchenObjectParent(this);
             multiObjectHolder.AddKitchenObject(kitchenObject);
             OnIngredientAdded?.Invoke();
             return true;
+        }
+        else if (kitchenObject.GetKitchenObjectSO().name == "Leftovers")
+        {
+            isClean = false;
+            kitchenObject.SetKitchenObjectParent(this);
+            multiObjectHolder.AddKitchenObject(kitchenObject);
         }
         return false;
     }

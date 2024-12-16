@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 2221394387273086248}
+  leftovers: {fileID: 11400000, guid: 2cc01c7c808d5bf47ac96986f8242984, type: 2}
 --- !u!4 &2221394387273086248 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8054209769538391004, guid: c09ebdc00ae314249aaecd894263cafc, type: 3}
