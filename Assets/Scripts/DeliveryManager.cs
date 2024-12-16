@@ -1,13 +1,19 @@
 using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DeliveryManager : MonoBehaviour
 {
-    public static DeliveryManager Instance { get; private set; }
-
     [SerializeField] private List<RecipeSO> availabileRecipesSO;
+
+    public static DeliveryManager Instance { get; private set; }
+    public event Action OnOrderAdded;
+    public event EventHandler<OnOrderServedEventArgs> OnOrderServed;
+    public class OnOrderServedEventArgs : EventArgs {
+        public int servedOrderIndex;
+    };
 
     private List<RecipeSO> orderedRecipesSO;
 
@@ -33,35 +39,33 @@ public class DeliveryManager : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(3f);
             SpawnNewRecipe();
-            yield return new WaitForSeconds(10f);
         }
     }
 
     private void SpawnNewRecipe()
     {
-        if (availabileRecipesSO.Count > 0)
+        if (availabileRecipesSO.Count > 0 && orderedRecipesSO.Count < 5)
         {
-            int randomIndex = Random.Range(0, availabileRecipesSO.Count);
+            int randomIndex = UnityEngine.Random.Range(0, availabileRecipesSO.Count);
 
             orderedRecipesSO.Add(availabileRecipesSO[randomIndex]);
 
+            OnOrderAdded?.Invoke();
+
             Debug.Log("New recipe added: " + orderedRecipesSO[orderedRecipesSO.Count-1].name);
-        }
-        else
-        {
-            Debug.LogWarning("No available recipes to spawn.");
         }
     }
 
     public void DeliverPlate(List<KitchenObject> foodItemsOnPlate)
     {
-        foreach (RecipeSO recipe in orderedRecipesSO)
+        for (int i = 0; i < orderedRecipesSO.Count; i++)
         {
-            if (IsRecipeMatched(recipe, foodItemsOnPlate))
+            if (IsRecipeMatched(orderedRecipesSO[i], foodItemsOnPlate))
             {
-                Debug.Log("Recipe matched: " + recipe.name);
-                orderedRecipesSO.Remove(recipe);
+                orderedRecipesSO.RemoveAt(i);
+                OnOrderServed?.Invoke(this, new OnOrderServedEventArgs { servedOrderIndex = i });
                 return;
             }
         }
@@ -87,5 +91,10 @@ public class DeliveryManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public List<RecipeSO> GetAllActiveOrders()
+    {
+        return orderedRecipesSO;
     }
 }
