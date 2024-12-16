@@ -13,17 +13,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
-    
+
       - name: Create releases folders
         run: echo "${{ secrets.VPS_PASSWORD }}" | sudo -S mkdir -p /unityreleases/
-
-      - name: Cache libs
-        uses: actions/cache@v3
-        with:
-          path: Library
-          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-          restore-keys: |
-            Library-
 
       - name: Build project (Windows x64)
         uses: game-ci/unity-builder@v4
@@ -38,21 +30,7 @@ jobs:
           buildName: x64
           buildsPath: unityreleases
           runAsHostUser: true
-      
-      - name: Build project (Windows x32)
-        uses: game-ci/unity-builder@v4
-        env:
-          UNITY_SERIAL:   ${{ secrets.UNITY_SERIAL }}
-          UNITY_EMAIL:    ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        with:
-          targetPlatform: StandaloneWindows
-          allowDirtyBuild: true
-          unityVersion: 6000.0.22f1
-          buildName: x32
-          buildsPath: unityreleases
-          runAsHostUser: true
-          
+
       - name: Upload built game as artifact
         uses: actions/upload-artifact@v3
         with:
