@@ -14,6 +14,10 @@ jobs:
         with:
           lfs: true
 
+      - name: Move Library Folder into the project
+        run: mv ~/OvercookedLibrary ~/actions-runner/_work/overcooked/overcooked/Library
+        continue-on-error: true
+
       - name: Create releases folders
         run: echo "${{ secrets.VPS_PASSWORD }}" | sudo -S mkdir -p /unityreleases/
 
@@ -36,3 +40,7 @@ jobs:
         with:
           name: build
           path: unityreleases
+
+      - name: Retain Library folder
+        run: mv ~/actions-runner/_work/overcooked/overcooked/Library ~/OvercookedLibrary
+        # continue-on-error: true
