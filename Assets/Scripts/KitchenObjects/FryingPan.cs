@@ -163,7 +163,7 @@ public class FryingPan : KitchenObject, IKitchenObjectParent, IProgressable
 
     public bool SetKitchenObject(KitchenObject kitchenObject)
     {
-        if (kitchenObject.GetKitchenObjectSO().name == meatKitchenObjectSO.name)
+        if (kitchenObject.GetKitchenObjectSO().name == meatKitchenObjectSO.name && !meatKitchenObject)
         {
             meatKitchenObject = kitchenObject;
             if (stoveCounter?.IsOn() == true)
