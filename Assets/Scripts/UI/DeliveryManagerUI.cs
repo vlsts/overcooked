@@ -34,7 +34,9 @@ public class DeliveryManagerUI : MonoBehaviour
     {
         ClearExistingOrders();
 
-        foreach (RecipeSO recipeSO in DeliveryManager.Instance.GetAllActiveOrders())
+        List<RecipeSO> activeOrders = DeliveryManager.Instance.GetAllActiveOrders();
+
+        foreach (RecipeSO recipeSO in activeOrders)
         {
             Transform orderTransform = Instantiate(individualOrderTemplate, orders);
             orderTransform.gameObject.SetActive(true);
@@ -47,10 +49,7 @@ public class DeliveryManagerUI : MonoBehaviour
     {
         foreach (Transform child in orders)
         {
-            if (child != individualOrderTemplate)
-            {
-                Destroy(child.gameObject);
-            }
+            Destroy(child.gameObject);
         }
 
         addedOrders.Clear();

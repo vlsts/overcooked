@@ -32,10 +32,7 @@ public class PlateUI : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            if (child != iconTemplate)
-            {
-                Destroy(child.gameObject);
-            }
+            Destroy(child.gameObject);
         }
     }
 }

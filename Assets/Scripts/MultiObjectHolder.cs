@@ -10,7 +10,7 @@ public class MultiObjectHolder : MonoBehaviour
 
     private void Awake()
     {
-        startingPositionFoodInsideTheBread = new Vector3(0, 0.05f, 0);
+        startingPositionFoodInsideTheBread = new Vector3(0, 0.2f, 0);
         kitchenObjects = new List<KitchenObject>();
     }
 
@@ -28,7 +28,7 @@ public class MultiObjectHolder : MonoBehaviour
             foreach (var obj in kitchenObjects)
             {
                 if (obj != bread)
-                    breadOnPlate.LiftTopBreadSlice(obj.GetKitchenObjectSO().heightOffset / 2);
+                    breadOnPlate.LiftTopBreadSlice(obj.GetKitchenObjectSO().heightOffset);
             }
         }
         else
@@ -44,6 +44,7 @@ public class MultiObjectHolder : MonoBehaviour
 
     private void PositionNewObject(KitchenObject kitchenObject)
     {
+        kitchenObject.transform.position = transform.position;
         if ((kitchenObjects.Count == 2 && breadOnPlate) || kitchenObjects.Count == 1)
         {
             kitchenObject.transform.position += startingPositionFoodInsideTheBread;
