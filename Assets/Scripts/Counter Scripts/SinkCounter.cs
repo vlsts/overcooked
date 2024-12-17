@@ -7,6 +7,8 @@ public class SinkCounter : BaseCounter
     public event Action<bool> OnTapToggle; 
     private bool isWashing = false;
 
+    private Coroutine washingCoroutine = null;
+
     public override void Interact(Player player)
     {
         if (!HasKitchenObject() && Player.Instance.GetKitchenObject() is Plate plate)
@@ -31,15 +33,20 @@ public class SinkCounter : BaseCounter
         isWashing = !isWashing;
         if (isWashing)
         {
-            StartCoroutine(WashingPlate());
+            washingCoroutine = StartCoroutine(WashingPlate());
+        }
+        else
+        {
+            StopCoroutine(washingCoroutine);
         }
         OnTapToggle?.Invoke(isWashing);
     }
 
     private IEnumerator WashingPlate()
     {
-        yield return new WaitForSeconds(3f);
-        OnTapToggle?.Invoke(false);
+        yield return new WaitForSeconds(4.5f);
+        isWashing = false;
+        OnTapToggle?.Invoke(isWashing);
         (GetKitchenObject() as Plate)?.Clean();
     }
 

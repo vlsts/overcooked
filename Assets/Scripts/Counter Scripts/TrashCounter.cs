@@ -11,7 +11,8 @@ public class TrashCounter : BaseCounter
 
             if (kitchenObject is Plate plate)
             {
-                plate.RemoveKitchenObject();
+                if (!plate.IsDirty())
+                    plate.RemoveKitchenObject();
             }
             else if (kitchenObject is FryingPan fryingPan)
             {

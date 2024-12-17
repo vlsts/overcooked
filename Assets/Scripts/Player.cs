@@ -48,9 +48,23 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     {
         if (!selectedCounter)
             return;
+        if (selectedCounter is SinkCounter possibleSinkCounter)
+        {
+            if (possibleSinkCounter.IsWashing())
+            {
+                Debug.Log("Cannot interact with sink while washing");
+                return;
+            }
+            else
+            {
+                Debug.Log("Interacting with sink");
+            }
+        }
         if (selectedCounter is SinkCounter sinkCounter)
         {
-            sinkCounter.OnTapToggle += SinkCounter_OnTapToggle;
+            if (!sinkCounter.HasKitchenObject())
+                sinkCounter.OnTapToggle += SinkCounter_OnTapToggle;
+            else sinkCounter.OnTapToggle -= SinkCounter_OnTapToggle;
         }    
         selectedCounter.Interact(this);
     }
@@ -64,8 +78,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void SinkCounter_OnTapToggle(bool isWashing)
     {
-        if (!isWashing)
-            (selectedCounter as SinkCounter).OnTapToggle -= SinkCounter_OnTapToggle;
         GameInput.Instance.ToggleMovement(isWashing);
     }
 
