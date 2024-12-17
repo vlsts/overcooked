@@ -9,7 +9,7 @@ public class DeliveryManager : MonoBehaviour
     [SerializeField] private List<RecipeSO> availabileRecipesSO;
 
     public static DeliveryManager Instance { get; private set; }
-    public event Action OnOrderAdded;
+    public event EventHandler OnOrderAdded;
     public event EventHandler<OnOrderServedEventArgs> OnOrderServed;
     public class OnOrderServedEventArgs : EventArgs {
         public int servedOrderIndex;
@@ -53,7 +53,7 @@ public class DeliveryManager : MonoBehaviour
 
             orderedRecipesSO.Add(availabileRecipesSO[randomIndex]);
 
-            OnOrderAdded?.Invoke();
+            OnOrderAdded?.Invoke(this, EventArgs.Empty);
         }
     }
 

@@ -30,7 +30,7 @@ public class DeliveryManagerUI : MonoBehaviour
         }
     }
 
-    private void DeliveryManager_OnOrderAdded()
+    private void DeliveryManager_OnOrderAdded(object sender, EventArgs e)
     {
         ClearExistingOrders();
 

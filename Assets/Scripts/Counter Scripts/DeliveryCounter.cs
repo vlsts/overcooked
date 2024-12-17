@@ -5,8 +5,22 @@ public class DeliveryCounter : BaseCounter
 {
     [SerializeField] private KitchenObjectSO leftovers;
 
+    public static DeliveryCounter Instance { get; private set; }
+
     public event Action OnCorrectDelivery;
     public event Action OnWrongDelivery;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public override void Interact(Player player)
     {
