@@ -27,11 +27,12 @@ public class DeliveryManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        orderedRecipesSO = new List<RecipeSO>();
     }
 
     private void Start()
     {
-        orderedRecipesSO = new List<RecipeSO>();
         StartCoroutine(SpawnRecipeCoroutine());
     }
 
@@ -53,8 +54,6 @@ public class DeliveryManager : MonoBehaviour
             orderedRecipesSO.Add(availabileRecipesSO[randomIndex]);
 
             OnOrderAdded?.Invoke();
-
-            Debug.Log("New recipe added: " + orderedRecipesSO[orderedRecipesSO.Count-1].name);
         }
     }
 
@@ -69,7 +68,6 @@ public class DeliveryManager : MonoBehaviour
                 return;
             }
         }
-        Debug.Log("No recipe matched.");
     }
 
     private bool IsRecipeMatched(RecipeSO recipe, List<KitchenObject> foodItemsOnPlate)
