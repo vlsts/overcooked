@@ -14,4 +14,9 @@ public class SelectedCounterVisual : MonoBehaviour
     {
         selectedVisual.SetActive(e.selectedCounter == counterObject);
     }
+
+    protected BaseCounter GetBaseCounter()
+    {
+        return counterObject;
+    }
 }

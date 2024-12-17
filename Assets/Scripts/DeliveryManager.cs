@@ -57,7 +57,7 @@ public class DeliveryManager : MonoBehaviour
         }
     }
 
-    public void DeliverPlate(List<KitchenObject> foodItemsOnPlate)
+    public bool DeliverPlate(List<KitchenObject> foodItemsOnPlate)
     {
         for (int i = 0; i < orderedRecipesSO.Count; i++)
         {
@@ -65,9 +65,10 @@ public class DeliveryManager : MonoBehaviour
             {
                 orderedRecipesSO.RemoveAt(i);
                 OnOrderServed?.Invoke(this, new OnOrderServedEventArgs { servedOrderIndex = i });
-                return;
+                return true;
             }
         }
+        return false;
     }
 
     private bool IsRecipeMatched(RecipeSO recipe, List<KitchenObject> foodItemsOnPlate)
