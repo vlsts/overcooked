@@ -11,7 +11,6 @@ public class StoveCounter : BaseCounter
     private void Awake()
     {
         SetKitchenObject(GetComponentInChildren<FryingPan>());
-        GetKitchenObject().SetKitchenObjectParent(this);
     }
 
     public override void Interact(Player player)

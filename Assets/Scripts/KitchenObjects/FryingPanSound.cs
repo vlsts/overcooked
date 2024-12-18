@@ -9,32 +9,32 @@ public class FryingPanSound : MonoBehaviour
 
     private void Awake()
     {
-        parentFryingPan.OnFrying += FryingPan_OnFrying;
-        parentFryingPan.OnBurningStarted += FryingPan_OnBurningStarted;
+        parentFryingPan.OnMeatStateChanged += FryingPan_OnMeatStateChanged;
     }
 
-    private void FryingPan_OnFrying(bool isFrying)
+    private void FryingPan_OnMeatStateChanged(object sender, FryingPan.OnMeatStateChangedEventArgs e)
     {
-        if (isFrying)
+        if (sender is FryingPan fryingPan)
         {
-            fryingMeat.Play();
-        }
-        else
-        {
-            fryingMeat.Stop();
-        }
-    }
-
-    private void FryingPan_OnBurningStarted(bool startedBurning)
-    {
-        
-        if (startedBurning)
-        {
-            warnBurningMeat.Play();
-        }
-        else
-        {
-            warnBurningMeat.Stop();
+            switch(fryingPan.GetCurrentState())
+            {
+                case FryingPan.State.Frying:
+                    fryingMeat.Play();
+                    break;
+                case FryingPan.State.Burning:
+                    fryingMeat.Stop();
+                    warnBurningMeat.Play();
+                    break;
+                case FryingPan.State.InFlames:
+                    warnBurningMeat.Stop();
+                    meatInFlames.Play();
+                    break;
+                default:
+                    fryingMeat.Stop();
+                    warnBurningMeat.Stop();
+                    meatInFlames.Stop();
+                    break;
+            }
         }
     }
 }

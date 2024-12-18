@@ -8,36 +8,27 @@ public class FryingPanVisual : MonoBehaviour
 
     void Start()
     {
-        fryingPanParent.OnFrying += FryingPanParent_OnFrying;
-        fryingPanParent.OnBurningStarted += FryingPanParent_OnBurning; ;
+        fryingPanParent.OnMeatStateChanged += FryingPanParent_OnMeatStateChanged;
     }
 
-    private void FryingPanParent_OnBurning(bool isBurning)
+    private void FryingPanParent_OnMeatStateChanged(object sender, FryingPan.OnMeatStateChangedEventArgs e)
     {
-        if (isBurning)
+        if (sender is FryingPan fryingPan)
         {
-            fire.Play();
+            switch(fryingPan.GetCurrentState()) {
+                case FryingPan.State.Frying:
+                    sizzlingOil.Play(); 
+                    fire.Stop();
+                    break;
+                case FryingPan.State.InFlames:
+                    fire.Play();
+                    sizzlingOil.Stop();
+                    break;
+                default:
+                    sizzlingOil.Stop();
+                    fire.Stop();
+                    break;
+            }
         }
-        else
-        {
-            fire.Stop();
-        }
-    }
-
-    private void FryingPanParent_OnFrying(bool isFrying)
-    {
-        if (isFrying) 
-        {
-            sizzlingOil.Play();            
-        }
-        else
-        {
-            sizzlingOil.Stop();
-        }
-    }
-
-    void Update()
-    {
-        
     }
 }

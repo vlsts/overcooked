@@ -4,16 +4,23 @@ public class StoveCounterSound : MonoBehaviour
 {
     [SerializeField] private StoveCounter parentCounter;
 
-    private AudioSource fryingMeat;
+    private AudioSource stoveFlame;
 
     private void Awake()
     {
-        fryingMeat = GetComponent<AudioSource>();
+        stoveFlame = GetComponent<AudioSource>();
         parentCounter.OnStoveStateChanged += StoveCounter_OnStoveStateChanged; ;
     }
 
-    private void StoveCounter_OnStoveStateChanged(bool obj)
+    private void StoveCounter_OnStoveStateChanged(bool isOn)
     {
-        
+        if (isOn)
+        {
+            stoveFlame.Play();
+        }
+        else
+        {
+            stoveFlame.Stop();
+        }
     }
 }

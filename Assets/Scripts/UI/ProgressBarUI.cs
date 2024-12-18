@@ -24,17 +24,24 @@ public class ProgressBarUI : MonoBehaviour
     {
         if (sender is FryingPan fryingPan)
         {
-            if (fryingPan.IsBurning())
+            if (fryingPan.GetCurrentState() != FryingPan.State.Frying)
             {
                 gameObject.SetActive(false);
-                return;
+            }
+            else
+            {
+                gameObject.SetActive(true);
+                barImage.fillAmount = e.currentProgress;
             }
         }
-        barImage.fillAmount = e.currentProgress;
-        if (e.currentProgress > 0f && e.currentProgress < 1f)
+        else
         {
-            gameObject.SetActive(true);
+            barImage.fillAmount = e.currentProgress;
+            if (e.currentProgress > 0f && e.currentProgress < 1f)
+            {
+                gameObject.SetActive(true);
+            }
+            else gameObject.SetActive(false);
         }
-        else gameObject.SetActive(false);
     }
 }

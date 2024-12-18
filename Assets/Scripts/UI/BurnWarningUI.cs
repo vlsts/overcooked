@@ -6,17 +6,19 @@ public class BurnWarningUI : MonoBehaviour
 
     private void Start()
     {
-        fryingPan.OnProgressChanged += FryingPan_OnProgressChanged;
+        fryingPan.OnMeatStateChanged += FryingPan_OnMeatStateChanged;
         gameObject.SetActive(false);
     }
 
-    private void FryingPan_OnProgressChanged(object sender, IProgressable.OnProgressChangedEventArgs e)
+    private void FryingPan_OnMeatStateChanged(object sender, FryingPan.OnMeatStateChangedEventArgs e)
     {
-
-        bool show = (e.currentProgress > 0 && fryingPan.IsBurning());
-
-        if (show)
+        if (fryingPan.GetCurrentState() == FryingPan.State.Burning)
+        {
             gameObject.SetActive(true);
-        else gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
