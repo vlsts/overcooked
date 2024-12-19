@@ -131,6 +131,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5677666654527515149, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+      propertyPath: counterObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677666654527515149, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+      propertyPath: selectedVisual
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8240181765925696676, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.72
@@ -171,8 +179,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 3010015819511127368, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+    - {fileID: 5677666654527515149, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 5088545265873357135, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
@@ -1012,7 +1023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8240181765925696676, guid: daa6e7e411181554f8b73b5c78c9486f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.72
+      value: 8.76
       objectReference: {fileID: 0}
     - target: {fileID: 8240181765925696676, guid: daa6e7e411181554f8b73b5c78c9486f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1131,8 +1142,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1674,6 +1685,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5677666654527515149, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+      propertyPath: counterObject
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8240181765925696676, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.5
@@ -1714,8 +1729,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 3010015819511127368, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+    - {fileID: 5677666654527515149, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 5088545265873357135, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
@@ -2908,6 +2926,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3010015819511127368, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677666654527515149, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677666654527515149, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+      propertyPath: counterObject
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8240181765925696676, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.5
@@ -2948,8 +2978,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 3010015819511127368, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+    - {fileID: 5677666654527515149, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 5088545265873357135, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
@@ -3229,7 +3262,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d9191774495fe474cbf16fe92a027d7c, type: 3}
   m_Resource: {fileID: 8300000, guid: d9191774495fe474cbf16fe92a027d7c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
@@ -3692,6 +3725,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5677666654527515149, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+      propertyPath: counterObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677666654527515149, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+      propertyPath: selectedVisual
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8240181765925696676, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.72
@@ -3732,8 +3773,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 3010015819511127368, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+    - {fileID: 5677666654527515149, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 5088545265873357135, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fe2af14c8727184297cd76ff6f7baa9, type: 3}
@@ -4290,7 +4334,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  emitterVelocityMode: 1
+  emitterVelocityMode: 0
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -4412,7 +4456,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 7
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4847,7 +4891,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 7
+    maxNumParticles: 10
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -5809,7 +5853,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2

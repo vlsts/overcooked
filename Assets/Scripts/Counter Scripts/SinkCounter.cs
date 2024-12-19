@@ -2,12 +2,43 @@ using System;
 using UnityEngine;
 using System.Collections;
 
-public class SinkCounter : BaseCounter
+public class SinkCounter : BaseCounter, IProgressable
 {
-    public event Action<bool> OnTapToggle; 
-    private bool isWashing = false;
+    public event Action<bool> OnTapToggle;
+    public event EventHandler<IProgressable.OnProgressChangedEventArgs> OnProgressChanged;
 
-    private Coroutine washingCoroutine = null;
+    private bool isWashing = false;
+    private float currentTime = 0f;
+    private const float totalWashingTime = 4.5f;
+
+    private void Update()
+    {
+        if (isWashing)
+        {
+            currentTime += Time.deltaTime;
+            OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
+            {
+                currentProgress = (float)currentTime / totalWashingTime
+            });
+
+            if (currentTime >= totalWashingTime)
+            {
+                FinishWashing();
+            }
+        }
+        else
+        {
+            currentTime = 0.0f;
+        }
+    }
+
+    private void FinishWashing()
+    {
+        isWashing = false;
+        currentTime = 0f;
+        OnTapToggle?.Invoke(isWashing);
+        (GetKitchenObject() as Plate)?.Clean();
+    }
 
     public override void Interact(Player player)
     {
@@ -33,21 +64,16 @@ public class SinkCounter : BaseCounter
         isWashing = !isWashing;
         if (isWashing)
         {
-            washingCoroutine = StartCoroutine(WashingPlate());
+            currentTime = 0f;
         }
         else
         {
-            StopCoroutine(washingCoroutine);
+            OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
+            {
+                currentProgress = 0f
+            });
         }
         OnTapToggle?.Invoke(isWashing);
-    }
-
-    private IEnumerator WashingPlate()
-    {
-        yield return new WaitForSeconds(4.5f);
-        isWashing = false;
-        OnTapToggle?.Invoke(isWashing);
-        (GetKitchenObject() as Plate)?.Clean();
     }
 
     public bool IsWashing()
