@@ -50,7 +50,7 @@ public class SinkCounter : BaseCounter, IProgressable
                 SetKitchenObject(plate);
             }
         }
-        else if (GetKitchenObject() is Plate plateOnSink)
+        else if (GetKitchenObject() is Plate plateOnSink && !Player.Instance.HasKitchenObject())
         {
             plateOnSink.SetKitchenObjectParent(Player.Instance);
             Player.Instance.SetKitchenObject(plateOnSink);
