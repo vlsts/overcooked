@@ -6,6 +6,7 @@ public class CuttingCounter : BaseCounter, IProgressable
 {
     [SerializeField] private List<CuttableFoodSO> cuttableFoods;
 
+    public static event EventHandler OnCut;
     public event Action OnObjectCut;
     public event EventHandler<IProgressable.OnProgressChangedEventArgs> OnProgressChanged;
 
@@ -53,6 +54,7 @@ public class CuttingCounter : BaseCounter, IProgressable
         {
             currentCuts++;
             OnObjectCut?.Invoke();
+            OnCut?.Invoke(this, EventArgs.Empty);
             OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
             {
                 currentProgress = (float)currentCuts / currentCuttableObject.necessaryCuts

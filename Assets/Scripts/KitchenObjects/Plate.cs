@@ -10,6 +10,7 @@ public class Plate : KitchenObject, IKitchenObjectParent
 
     public event Action OnIngredientAdded;
     public event Action OnClearPlate;
+    public static event EventHandler OnFoodItemAdded;
 
     private MultiObjectHolder multiObjectHolder;
     private bool isClean = true;
@@ -48,6 +49,7 @@ public class Plate : KitchenObject, IKitchenObjectParent
             kitchenObject.SetKitchenObjectParent(this);
             multiObjectHolder.AddKitchenObject(kitchenObject);
             OnIngredientAdded?.Invoke();
+            OnFoodItemAdded?.Invoke(this, EventArgs.Empty);
             return true;
         }
         else if (kitchenObject.GetKitchenObjectSO().name == "Leftovers")

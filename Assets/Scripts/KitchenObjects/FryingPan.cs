@@ -7,6 +7,7 @@ public class FryingPan : KitchenObject, IKitchenObjectParent, IProgressable
     [SerializeField] private KitchenObjectSO meatKitchenObjectSO;
     [SerializeField] private MeatTransformationSO meatTransformationSO;
 
+    public static event EventHandler OnMeatAdded;
     public event EventHandler<IProgressable.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler<OnMeatStateChangedEventArgs> OnMeatStateChanged;
     public class OnMeatStateChangedEventArgs : EventArgs
@@ -189,6 +190,7 @@ public class FryingPan : KitchenObject, IKitchenObjectParent, IProgressable
         if (kitchenObject.GetKitchenObjectSO() == meatKitchenObjectSO && !meatKitchenObject)
         {
             meatKitchenObject = kitchenObject;
+            OnMeatAdded?.Invoke(this, EventArgs.Empty);
             if (stoveCounter?.IsOn() == true)
             {
                 StartCooking();

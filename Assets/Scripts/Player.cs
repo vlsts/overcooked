@@ -15,7 +15,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     {
         public BaseCounter selectedCounter;
     }
-
+    public event Action OnPickDropItem;
+    
     public static Player Instance { get; private set; }
     
     private float currentSpeed;
@@ -135,7 +136,10 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             }
         }
 
-        transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
+        if (moveDirection != Vector3.zero)
+        {
+            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
+        }
 
         currentSpeed = moveDirection.magnitude;
     }
@@ -155,14 +159,16 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         if (!kitchenObject)
         {
             kitchenObject = pickedKitchenObject;
+            OnPickDropItem?.Invoke();
             return true;
         }
         return false;
     }
-    
+
     public void RemoveKitchenObject()
     {
         kitchenObject = null;
+        OnPickDropItem?.Invoke();
     }
 
     public Transform GetHoldPoint()
