@@ -8,11 +8,6 @@ public class OrderUI : MonoBehaviour
     [SerializeField] private Transform iconContainer;
     [SerializeField] private Transform iconTemplate;
 
-    private void Start()
-    {
-        
-    }
-
     public void SetRecipeSO(RecipeSO recipeSO)
     {
         recipeNameText.text = recipeSO.recipeName;

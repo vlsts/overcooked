@@ -14,7 +14,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
 
     private List<AudioSource> audioSourcePool;
-    private const int PoolSize = 10;
+    private const int POOL_SIZE = 10;
 
     private void Awake()
     {
@@ -43,7 +43,7 @@ public class SoundManager : MonoBehaviour
 
     private void InitializeAudioSourcePool()
     {
-        for (int i = 0; i < PoolSize; i++)
+        for (int i = 0; i < POOL_SIZE; i++)
         {
             GameObject audioSourceObject = new GameObject("AudioSource_" + i);
             audioSourceObject.transform.SetParent(transform);

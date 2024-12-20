@@ -20,8 +20,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     public static Player Instance { get; private set; }
     
     private float currentSpeed;
-    private const float playerRadius = .7f;
-    private const float playerHeight = 2f;
+    private const float PLAYER_RADIUS = .7f;
+    private const float PLAYER_HEIGHT = 2f;
     private Vector3 lastInteractDirection;
     private BaseCounter selectedCounter;
     private KitchenObject kitchenObject;
@@ -53,12 +53,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         {
             if (possibleSinkCounter.IsWashing())
             {
-                Debug.Log("Cannot interact with sink while washing");
                 return;
-            }
-            else
-            {
-                Debug.Log("Interacting with sink");
             }
         }
         if (selectedCounter is SinkCounter sinkCounter)
@@ -120,17 +115,17 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         Vector2 inputVector = GameInput.Instance.GetMovementVector();
         Vector3 moveDirection = new(inputVector.x, 0, inputVector.y);
 
-        if (!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirection, moveDistance))
+        if (!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * PLAYER_HEIGHT, PLAYER_RADIUS, moveDirection, moveDistance))
         {
             transform.position += moveSpeed * Time.deltaTime * moveDirection;
         }
         else if (inputVector.x != 0 && inputVector.y != 0)
         {
-            if (!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, new Vector3(moveDirection.x, 0, 0).normalized, moveDistance))
+            if (!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * PLAYER_HEIGHT, PLAYER_RADIUS, new Vector3(moveDirection.x, 0, 0).normalized, moveDistance))
             {
                 transform.position += moveSpeed * Time.deltaTime * new Vector3(moveDirection.x, 0, 0).normalized;
             }
-            else if (!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, new Vector3(0, 0, moveDirection.z).normalized, moveDistance))
+            else if (!Physics.CapsuleCast(transform.position, transform.position + Vector3.up * PLAYER_HEIGHT, PLAYER_RADIUS, new Vector3(0, 0, moveDirection.z).normalized, moveDistance))
             {
                 transform.position += moveSpeed * Time.deltaTime * new Vector3(0, 0, moveDirection.z).normalized;
             }

@@ -11,8 +11,8 @@ public class GameLogicManager : MonoBehaviour
         public int ordersDelivered;
     }
 
-    private int ordersDelivered = 0;
-    private const float gameplayTime = 5f;
+    private const float GAMEPLAY_TIME = 5f;
+    private int ordersDelivered;
     private float currentTime;
 
     private void Awake()
@@ -23,7 +23,8 @@ public class GameLogicManager : MonoBehaviour
         }
         else Destroy(Instance);
 
-        currentTime = gameplayTime;
+        ordersDelivered = 0;
+        currentTime = GAMEPLAY_TIME;
     }
 
     private void Start()

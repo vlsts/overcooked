@@ -6,24 +6,14 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
 
     private KitchenObject kitchenObject;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     public virtual void Interact(Player player)
     {
-        Debug.Log("BaseCounter.Interact()");
+        
     }
 
     public virtual void InteractSecondary(Player player)
     {
-        Debug.Log("BaseCounter.InteractSecondary()");
+        
     }
 
     public bool SetKitchenObject(KitchenObject placedKitchenObject)

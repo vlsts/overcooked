@@ -13,16 +13,6 @@ public class CuttingCounter : BaseCounter, IProgressable
     private int currentCuts;
     private CuttableFoodSO currentCuttableObject;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     public override void Interact(Player player)
     {
         if (!HasKitchenObject() && Player.Instance.HasKitchenObject())

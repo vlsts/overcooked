@@ -2,16 +2,6 @@ using UnityEngine;
 
 public class ClearCounter : BaseCounter
 {
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     public override void Interact(Player player)
     {
         if (!HasKitchenObject() && Player.Instance.HasKitchenObject())

@@ -7,9 +7,15 @@ public class SinkCounter : BaseCounter, IProgressable
     public event Action<bool> OnTapToggle;
     public event EventHandler<IProgressable.OnProgressChangedEventArgs> OnProgressChanged;
 
-    private bool isWashing = false;
-    private float currentTime = 0f;
-    private const float totalWashingTime = 4.5f;
+    private const float TOTAL_WASHING_TIME = 4.5f;
+    private bool isWashing;
+    private float currentTime;
+
+    private void Awake()
+    {
+        isWashing = false;
+        currentTime = 0.0f;
+    }
 
     private void Update()
     {
@@ -18,10 +24,10 @@ public class SinkCounter : BaseCounter, IProgressable
             currentTime += Time.deltaTime;
             OnProgressChanged?.Invoke(this, new IProgressable.OnProgressChangedEventArgs
             {
-                currentProgress = (float)currentTime / totalWashingTime
+                currentProgress = (float)currentTime / TOTAL_WASHING_TIME
             });
 
-            if (currentTime >= totalWashingTime)
+            if (currentTime >= TOTAL_WASHING_TIME)
             {
                 FinishWashing();
             }

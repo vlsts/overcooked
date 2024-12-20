@@ -6,16 +6,6 @@ public class KitchenObject : MonoBehaviour
 
     private IKitchenObjectParent kitchenObjectParent;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     public KitchenObjectSO GetKitchenObjectSO()
     {
         return kitchenObjectSO;

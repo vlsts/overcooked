@@ -9,7 +9,6 @@ public class PlayerSound : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-
     void Update()
     {
         if (Player.Instance.GetCurrentSpeed() > 0.0f)

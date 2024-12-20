@@ -13,21 +13,12 @@ public class Plate : KitchenObject, IKitchenObjectParent
     public static event EventHandler OnFoodItemAdded;
 
     private MultiObjectHolder multiObjectHolder;
-    private bool isClean = true;
+    private bool isClean;
 
     private void Awake()
     {
+        isClean = true;
         multiObjectHolder = gameObject.AddComponent<MultiObjectHolder>();
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
     }
 
     private bool IsValidKitchenObject(KitchenObject kitchenObject)

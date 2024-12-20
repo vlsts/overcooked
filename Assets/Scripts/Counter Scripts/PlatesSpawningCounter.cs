@@ -9,8 +9,13 @@ public class PlatesSpawningCounter : BaseCounter
     public event Action OnPlateSpawned;
     public event Action OnPlateTaken;
 
-    private int platesSpawned = 0;
-    private int maxPlatesNumber = 3;
+    private int platesSpawned;
+    private const int MAX_PLATES_NUMBER = 3;
+
+    private void Awake()
+    {
+        platesSpawned = 0;
+    }
 
     void Start()
     {
@@ -19,7 +24,7 @@ public class PlatesSpawningCounter : BaseCounter
 
     private void SpawnPlates()
     {
-        for (int i = 0; i < maxPlatesNumber; i++)
+        for (int i = 0; i < MAX_PLATES_NUMBER; i++)
         {
             platesSpawned++;
             OnPlateSpawned?.Invoke();
