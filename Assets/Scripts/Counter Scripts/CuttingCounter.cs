@@ -67,4 +67,9 @@ public class CuttingCounter : BaseCounter, IProgressable
             }
         }
     }
+
+    public static void ResetStatcEvents()
+    {
+        OnCut = null;
+    }
 }

@@ -12,7 +12,7 @@ public class GameLogicManager : MonoBehaviour
     }
 
     private int ordersDelivered = 0;
-    private const float gameplayTime = 10f;
+    private const float gameplayTime = 5f;
     private float currentTime;
 
     private void Awake()
@@ -24,6 +24,16 @@ public class GameLogicManager : MonoBehaviour
         else Destroy(Instance);
 
         currentTime = gameplayTime;
+    }
+
+    private void Start()
+    {
+        DeliveryCounter.Instance.OnCorrectDelivery += DeliveryCounter_OnCorrectDelivery;
+    }
+
+    private void DeliveryCounter_OnCorrectDelivery()
+    {
+        ordersDelivered++;
     }
 
     void Update()
@@ -39,8 +49,17 @@ public class GameLogicManager : MonoBehaviour
             {
                 ordersDelivered = ordersDelivered
             });
+            ResetStaticEvents();
             Time.timeScale = 0;
         }
+    }
+
+    private void ResetStaticEvents()
+    {
+        CuttingCounter.ResetStatcEvents();
+        TrashCounter.ResetStaticEvents();
+        FryingPan.ResetStaticEvents();
+        Plate.ResetStaticEvents();
     }
 
     public (int minutes, int seconds) GetCurrentTime()

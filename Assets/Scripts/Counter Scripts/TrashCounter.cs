@@ -41,4 +41,9 @@ public class TrashCounter : BaseCounter
 
         }
     }
+
+    public static void ResetStaticEvents()
+    {
+        OnTrash = null;
+    }
 }

@@ -228,4 +228,9 @@ public class FryingPan : KitchenObject, IKitchenObjectParent, IProgressable
     {
         return currentState;
     }
+
+    public static void ResetStaticEvents()
+    {
+        OnMeatAdded = null;
+    }
 }

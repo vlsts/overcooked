@@ -9,15 +9,12 @@ public class PlatesSpawningCounter : BaseCounter
     public event Action OnPlateSpawned;
     public event Action OnPlateTaken;
 
-    private const float spawnWaitTime = 4f;
     private int platesSpawned = 0;
     private int maxPlatesNumber = 3;
-    //private Coroutine spawnPlateCoroutine;
 
     void Start()
     {
         SpawnPlates();
-        //spawnPlateCoroutine = StartCoroutine(SpawnPlateCoroutine());
     }
 
     private void SpawnPlates()
@@ -28,20 +25,6 @@ public class PlatesSpawningCounter : BaseCounter
             OnPlateSpawned?.Invoke();
         }
     }
-
-    //private IEnumerator SpawnPlateCoroutine()
-    //{
-    //    while (true)
-    //    {
-    //        yield return new WaitForSeconds(spawnWaitTime);
-
-    //        if (platesSpawned < maxPlatesNumber)
-    //        {
-    //            platesSpawned++;
-    //            OnPlateSpawned?.Invoke();
-    //        }
-    //    }
-    //}
 
     public override void Interact(Player player)
     {

@@ -27,6 +27,14 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.SecondaryInteract.performed += SecondaryInteract_performed;
     }
 
+    private void OnDestroy()
+    {
+        playerInputActions.Player.PrimaryInteract.performed -= PrimaryInteract_performed;
+        playerInputActions.Player.SecondaryInteract.performed -= SecondaryInteract_performed;
+
+        playerInputActions.Dispose();
+    }
+
     private void SecondaryInteract_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnSecondaryInteractAction?.Invoke();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Rendering;
@@ -10,18 +11,22 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip cuttingSound;
     [SerializeField] private AudioClip pickDropItem;
 
-    private AudioSource audioSource;
-
     public static SoundManager Instance { get; private set; }
 
+    private List<AudioSource> audioSourcePool;
+    private const int PoolSize = 10;
 
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-        else Destroy(Instance);
+        }
+        else Destroy(gameObject);
 
-        audioSource = GetComponent<AudioSource>();
+        audioSourcePool = new List<AudioSource>();
+
+        InitializeAudioSourcePool();
     }
 
     private void Start()
@@ -33,6 +38,38 @@ public class SoundManager : MonoBehaviour
         Plate.OnFoodItemAdded += Plate_OnFoodItemAdded;
         FryingPan.OnMeatAdded += FryingPan_OnMeatAdded;
         TrashCounter.OnTrash += TrashCounter_OnTrash;
+        GameLogicManager.Instance.OnGameEnd += GameLogicManager_OnGameEnd;
+    }
+
+    private void InitializeAudioSourcePool()
+    {
+        for (int i = 0; i < PoolSize; i++)
+        {
+            GameObject audioSourceObject = new GameObject("AudioSource_" + i);
+            audioSourceObject.transform.SetParent(transform);
+            AudioSource audioSource = audioSourceObject.AddComponent<AudioSource>();
+            audioSourcePool.Add(audioSource);
+        }
+    }
+
+    private AudioSource GetAvailableAudioSource()
+    {
+        foreach (var audioSource in audioSourcePool)
+        {
+            if (!audioSource.isPlaying)
+                return audioSource;
+        }
+
+        return audioSourcePool[0];
+    }
+
+    private void GameLogicManager_OnGameEnd(object sender, GameLogicManager.OnGameEndedEventArgs e)
+    {
+        AudioSource[] audioSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+        foreach (AudioSource audioSource in audioSources)
+        {
+            audioSource.Stop();
+        }
     }
 
     private void TrashCounter_OnTrash(object sender, EventArgs e)
@@ -72,10 +109,11 @@ public class SoundManager : MonoBehaviour
 
     private void PlaySound(AudioClip clip, Vector3 position, float volume, float pitch = 1.0f)
     {
-        audioSource.clip = clip;
-        audioSource.transform.position = position;
-        audioSource.volume = volume;
-        audioSource.pitch = pitch;
-        audioSource.Play();
+        AudioSource availableSource = GetAvailableAudioSource();
+        availableSource.transform.position = position;
+        availableSource.clip = clip;
+        availableSource.volume = volume;
+        availableSource.pitch = pitch;
+        availableSource.Play();
     }
 }

@@ -77,6 +77,11 @@ public class Plate : KitchenObject, IKitchenObjectParent
         return multiObjectHolder.GetAllKitchenObjects();
     }
 
+    public static void ResetStaticEvents()
+    {
+        OnFoodItemAdded = null;
+    }
+
     //Interface implementations
 
     public Transform GetHoldPoint()
