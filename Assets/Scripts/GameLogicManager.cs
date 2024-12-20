@@ -11,7 +11,7 @@ public class GameLogicManager : MonoBehaviour
         public int ordersDelivered;
     }
 
-    private const float GAMEPLAY_TIME = 5f;
+    private const float GAMEPLAY_TIME = 90f;
     private int ordersDelivered;
     private float currentTime;
 

@@ -87,7 +87,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     {
         Vector2 inputVector = GameInput.Instance.GetMovementVector();
         Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y);
-        float raycastDistance = 3f;
+        float raycastDistance = 2f;
 
         if (moveDirection != Vector3.zero)
             lastInteractDirection = moveDirection;
